@@ -1,217 +1,647 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" class="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KHO TÀI NGUYÊN MMO - Mua Bán Via FB, Gmail, TikTok, Shopee Tự Động</title>
-  <meta name="description" content="Hệ thống cung cấp tài nguyên Facebook, Gmail, TikTok, Shopee uy tín, tự động 24/7. Giá rẻ, bảo hành sai mã, hỗ trợ nạp tiền và lấy OTP tự động mượt mà.">
-  <meta name="keywords" content="tài nguyên mmo, mua via facebook, mua gmail 2fa, acc tiktok, tài khoản shopee">
-  <link rel="canonical" href="https://khotainguyenmmo.com/">
-
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://khotainguyenmmo.com/">
-  <meta property="og:title" content="KHO TÀI NGUYÊN MMO - Mua Bán Via FB, Gmail, TikTok, Shopee Tự Động">
-  <meta property="og:description" content="Hệ thống cung cấp tài nguyên MMO tự động 24/7. Bảo hành 1 đổi 1, hỗ trợ kỹ thuật nhanh chóng.">
-
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Schema.org Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Kho Tai Nguyen MMO",
-    "url": "https://khotainguyenmmo.com/",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://khotainguyenmmo.com/?s={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
-  }
-  </script>
-</head>
-<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col">
-
-  <!-- Header / Navigation -->
-  <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-      <a href="#" class="text-xl font-bold bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent">
-        KHO TÀI NGUYÊN MMO
-      </a>
-      <nav class="hidden md:flex gap-6 text-sm font-medium text-slate-300">
-        <a href="#facebook" class="hover:text-blue-400 transition">Facebook</a>
-        <a href="#gmail" class="hover:text-red-400 transition">Gmail</a>
-        <a href="#tiktok" class="hover:text-pink-400 transition">TikTok</a>
-        <a href="#shopee" class="hover:text-orange-400 transition">Shopee</a>
-        <a href="#nap-tien" class="hover:text-emerald-400 transition">Nạp Tiền</a>
-      </nav>
-      <div class="flex gap-3">
-        <button class="px-4 py-2 text-sm font-medium bg-slate-800 hover:bg-slate-700 rounded-lg border border-slate-700">Đăng Nhập</button>
-        <button class="px-4 py-2 text-sm font-medium bg-indigo-600 hover:bg-indigo-500 rounded-lg shadow-lg shadow-indigo-500/20">Đăng Ký</button>
-      </div>
-    </div>
-  </header>
-
-  <!-- Hero Section -->
-  <section class="py-12 text-center px-4 max-w-4xl mx-auto">
-    <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-100 mb-4">
-      Hệ Thống Cung Cấp Tài Nguyên Tự Động
-    </h1>
-    <p class="text-slate-400 text-base md:text-lg mb-8">
-      Sở hữu tài khoản Facebook, Gmail, TikTok, Shopee chất lượng cao – Bảo hành uy tín – Nạp tiền & Giao hàng tự động 24/7.
-    </p>
-    <div class="relative max-w-xl mx-auto">
-      <input type="text" placeholder="Tìm kiếm nhanh tài nguyên (ví dụ: Via cổ, Gmail 2FA, Shopee...)..." 
-             class="w-full pl-4 pr-12 py-3 bg-slate-900 border border-slate-800 rounded-xl focus:outline-none focus:border-indigo-500 text-sm">
-      <button class="absolute right-3 top-3 text-slate-400 hover:text-white">
-        🔍
-      </button>
-    </div>
-  </section>
-
-  <!-- Main Resource Categories -->
-  <main class="max-w-7xl mx-auto px-4 py-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 flex-1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RESOURCE HUB - Hệ Thống Cung Cấp Tài Nguyên Khổng Lồ</title>
     
-    <!-- 1. FACEBOOK -->
-    <div id="facebook" class="bg-slate-900 border border-slate-800 rounded-2xl p-5 hover:border-blue-500/50 transition">
-      <div class="flex items-center gap-3 mb-4">
-        <div class="w-10 h-10 rounded-xl bg-blue-600/20 text-blue-400 flex items-center justify-center font-bold text-lg">FB</div>
-        <div>
-          <h2 class="font-bold text-lg text-slate-100">Tài Nguyên Facebook</h2>
-          <p class="text-xs text-slate-400">Via, Clone, BM, Page cổ</p>
+    <!-- External Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#090d16',
+                        cardBg: '#0f172a',
+                        cardInner: '#172033',
+                        fbColor: '#1877f2',
+                        gmColor: '#ea4335',
+                        tkColor: '#fe2c55',
+                        spColor: '#ee4d2d',
+                        btnBlue: '#2563eb'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #080c14; color: #f8fafc; font-family: system-ui, -apple-system, sans-serif; }
+        .gradient-border-fb { border: 1px solid rgba(24, 119, 242, 0.4); box-shadow: 0 0 15px rgba(24, 119, 242, 0.15); }
+        .gradient-border-gm { border: 1px solid rgba(234, 67, 53, 0.4); box-shadow: 0 0 15px rgba(234, 67, 53, 0.15); }
+        .gradient-border-tk { border: 1px solid rgba(254, 44, 85, 0.4); box-shadow: 0 0 15px rgba(254, 44, 85, 0.15); }
+        .gradient-border-sp { border: 1px solid rgba(238, 77, 45, 0.4); box-shadow: 0 0 15px rgba(238, 77, 45, 0.15); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased">
+
+    <!-- Header Navigation Bar -->
+    <header class="border-b border-slate-800/80 bg-[#090d16]/90 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
+            
+            <!-- Logo -->
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center font-black text-xl text-white shadow-lg shadow-blue-500/30">
+                    RH
+                </div>
+                <div>
+                    <a href="#" class="text-lg font-black tracking-wider text-white block leading-none">RESOURCE HUB</a>
+                    <span class="text-[10px] tracking-widest text-blue-400 font-bold uppercase">TÀI NGUYÊN VIP</span>
+                </div>
+            </div>
+
+            <!-- Menu Links -->
+            <nav class="hidden lg:flex items-center gap-8 text-sm font-semibold text-slate-300">
+                <a href="javascript:void(0)" onclick="switchMainTab('market')" class="text-blue-400 border-b-2 border-blue-500 pb-1">Trang chủ</a>
+                <a href="#facebook" onclick="switchCategory('Facebook')" class="hover:text-white transition">Facebook <i class="fa-solid fa-chevron-down text-[10px] ml-1"></i></a>
+                <a href="#gmail" onclick="switchCategory('Gmail')" class="hover:text-white transition">Gmail <i class="fa-solid fa-chevron-down text-[10px] ml-1"></i></a>
+                <a href="#tiktok" onclick="switchCategory('TikTok')" class="hover:text-white transition">TikTok <i class="fa-solid fa-chevron-down text-[10px] ml-1"></i></a>
+                <a href="#shopee" onclick="switchCategory('Shopee')" class="hover:text-white transition">Shopee <i class="fa-solid fa-chevron-down text-[10px] ml-1"></i></a>
+                <a href="javascript:void(0)" onclick="switchMainTab('otp')" class="hover:text-white transition">Lấy OTP</a>
+                <a href="javascript:void(0)" onclick="switchMainTab('orders')" class="hover:text-white transition">Quản lý đơn</a>
+            </nav>
+
+            <!-- Wallet & User Actions -->
+            <div class="flex items-center gap-3">
+                <div id="headerWalletBox" class="hidden sm:flex items-center gap-2 bg-slate-900/80 px-3 py-1.5 rounded-xl border border-slate-800 text-xs text-slate-300">
+                    <span>💰 Đang tải số dư...</span>
+                </div>
+                <div id="headerUserActions" class="flex items-center gap-2"></div>
+            </div>
         </div>
-      </div>
-      <div class="space-y-3">
-        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/80 flex justify-between items-center">
-          <div>
-            <div class="font-semibold text-sm">Via Cổ Việt (2010 - 2018)</div>
-            <div class="text-xs text-emerald-400 font-medium">Còn lại: 154</div>
-          </div>
-          <div class="text-right">
-            <div class="text-sm font-bold text-indigo-400">45.000đ</div>
-            <button class="mt-1 px-3 py-1 bg-indigo-600 text-xs rounded-md font-medium hover:bg-indigo-500">Mua</button>
-          </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 py-10 flex-1 w-full space-y-12">
+
+        <!-- SECTION 1: MARKETPLACE (GIAO DIỆN CHÍNH GIỐNG ẢNH MẪU) -->
+        <section id="sectionMarket" class="space-y-10">
+            
+            <!-- Hero Title & Search Box -->
+            <div class="text-center space-y-4 max-w-3xl mx-auto">
+                <h1 class="text-3xl md:text-5xl font-black tracking-tight text-white uppercase">
+                    HỆ THỐNG CUNG CẤP TÀI NGUYÊN KHỔNG LỒ
+                </h1>
+                <p class="text-slate-400 text-sm font-medium">Uy tín - Tự động - Bảo hành 24/7</p>
+                
+                <div class="relative max-w-xl mx-auto pt-2">
+                    <input type="text" id="searchMarketInput" placeholder="Tìm kiếm nhanh được...." class="w-full pl-5 pr-12 py-3.5 bg-[#0f172a] border border-slate-800 rounded-2xl text-xs text-slate-200 focus:outline-none focus:border-blue-500 shadow-inner">
+                    <button class="absolute right-4 top-5 text-slate-400 hover:text-white">
+                        <i class="fa-solid fa-magnifying-glass text-sm"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Categories 4-Column Grid (FB, Gmail, TikTok, Shopee) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- 1. TÀI NGUYÊN FACEBOOK -->
+                <div id="facebook" class="bg-[#0b111e] gradient-border-fb rounded-3xl p-5 space-y-5 flex flex-col justify-between">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-full bg-blue-600 flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-blue-600/40">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </div>
+                        <div>
+                            <h2 class="font-extrabold text-lg text-white uppercase tracking-wider">TÀI NGUYÊN</h2>
+                            <p class="font-extrabold text-lg text-blue-500 uppercase tracking-wider">FACEBOOK</p>
+                        </div>
+                    </div>
+
+                    <div id="grid-FB" class="space-y-3">
+                        <!-- Dynamic items loaded via JS -->
+                        <div class="bg-[#131b2e] p-3 rounded-2xl border border-slate-800/80 flex justify-between items-center text-xs">
+                            <div>
+                                <div class="font-bold text-slate-200"><i class="fa-brands fa-facebook text-blue-500"></i> Via cổ | Clone</div>
+                                <div class="text-[11px] text-slate-400 mt-1">5,000đ - 150,000đ</div>
+                            </div>
+                            <button onclick="switchCategory('Facebook')" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-[11px]">Xem chi tiết</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. TÀI NGUYÊN GMAIL -->
+                <div id="gmail" class="bg-[#0b111e] gradient-border-gm rounded-3xl p-5 space-y-5 flex flex-col justify-between">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-red-500/10 border border-red-500/30 flex items-center justify-center text-red-500 text-2xl font-bold shadow-lg shadow-red-500/20">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h2 class="font-extrabold text-lg text-white uppercase tracking-wider">TÀI NGUYÊN</h2>
+                            <p class="font-extrabold text-lg text-red-500 uppercase tracking-wider">GMAIL</p>
+                        </div>
+                    </div>
+
+                    <div id="grid-GM" class="space-y-3">
+                        <div class="bg-[#131b2e] p-3 rounded-2xl border border-slate-800/80 flex justify-between items-center text-xs">
+                            <div>
+                                <div class="font-bold text-slate-200"><i class="fa-solid fa-envelope text-red-500"></i> Gmail cổ / 2FA</div>
+                                <div class="text-[11px] text-slate-400 mt-1">5,000đ - 150,000đ</div>
+                            </div>
+                            <button onclick="switchCategory('Gmail')" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-[11px]">Xem chi tiết</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. TÀI NGUYÊN TIKTOK -->
+                <div id="tiktok" class="bg-[#0b111e] gradient-border-tk rounded-3xl p-5 space-y-5 flex flex-col justify-between">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-slate-900 border border-pink-500/30 flex items-center justify-center text-pink-500 text-2xl font-bold shadow-lg shadow-pink-500/20">
+                            <i class="fa-brands fa-tiktok"></i>
+                        </div>
+                        <div>
+                            <h2 class="font-extrabold text-lg text-white uppercase tracking-wider">TÀI NGUYÊN</h2>
+                            <p class="font-extrabold text-lg text-pink-500 uppercase tracking-wider">TIKTOK</p>
+                        </div>
+                    </div>
+
+                    <div id="grid-TT" class="space-y-3">
+                        <div class="bg-[#131b2e] p-3 rounded-2xl border border-slate-800/80 flex justify-between items-center text-xs">
+                            <div>
+                                <div class="font-bold text-slate-200"><i class="fa-brands fa-tiktok text-pink-500"></i> Acc TikTok Follow / Ads</div>
+                                <div class="text-[11px] text-slate-400 mt-1">5,000đ - 50,000đ</div>
+                            </div>
+                            <button onclick="switchCategory('TikTok')" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-[11px]">Xem chi tiết</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. TÀI NGUYÊN SHOPEE (THÊM MỚI THEO YÊU CẦU) -->
+                <div id="shopee" class="bg-[#0b111e] gradient-border-sp rounded-3xl p-5 space-y-5 flex flex-col justify-between">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-orange-500/10 border border-orange-500/30 flex items-center justify-center text-orange-500 text-2xl font-bold shadow-lg shadow-orange-500/20">
+                            <i class="fa-solid fa-bag-shopping"></i>
+                        </div>
+                        <div>
+                            <h2 class="font-extrabold text-lg text-white uppercase tracking-wider">TÀI NGUYÊN</h2>
+                            <p class="font-extrabold text-lg text-orange-500 uppercase tracking-wider">SHOPEE</p>
+                        </div>
+                    </div>
+
+                    <div id="grid-SP" class="space-y-3">
+                        <div class="bg-[#131b2e] p-3 rounded-2xl border border-slate-800/80 flex justify-between items-center text-xs">
+                            <div>
+                                <div class="font-bold text-slate-200"><i class="fa-solid fa-bag-shopping text-orange-500"></i> Acc Shopee Trắng / Ngâm</div>
+                                <div class="text-[11px] text-slate-400 mt-1">8,000đ - 35,000đ</div>
+                            </div>
+                            <button onclick="switchCategory('Shopee')" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-[11px]">Xem chi tiết</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Detailed Products List Modal/Area -->
+            <div id="detailedStoreArea" class="bg-[#0b111e] border border-slate-800 rounded-3xl p-6 space-y-4">
+                <div class="flex justify-between items-center border-b border-slate-800 pb-4">
+                    <h3 id="currentCategoryTitle" class="font-bold text-base text-white">Danh Sách Tài Khoản Sẵn Có</h3>
+                    <div class="flex gap-2 text-xs">
+                        <button onclick="switchCategory('my')" class="px-3 py-1.5 bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 rounded-xl font-bold">📦 Đã mua</button>
+                    </div>
+                </div>
+                <div id="marketList" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="col-span-full text-center py-8 text-slate-500 text-xs">Đang tải danh sách...</div>
+                </div>
+                <div id="myAccList" class="hidden"></div>
+            </div>
+
+            <!-- Real-time Transactions & System Stats (Khung phía dưới giống ảnh) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
+                <!-- Real-time Transactions -->
+                <div class="md:col-span-2 bg-[#0b111e] border border-slate-800 rounded-3xl p-6 space-y-4">
+                    <div>
+                        <h3 class="font-bold text-base text-white">Lịch sử mua hàng gần đây</h3>
+                        <p class="text-xs text-blue-400">Real-time transactions</p>
+                    </div>
+                    <div class="space-y-2.5 text-xs text-slate-300">
+                        <div class="bg-[#131b2e] p-3 rounded-xl flex justify-between items-center">
+                            <span class="text-slate-400">nguyen***@gmail.com</span>
+                            <span class="font-semibold text-blue-400">Đã mua 5 Via Cổ Việt</span>
+                            <span class="text-slate-500 text-[11px]">2 phút trước</span>
+                        </div>
+                        <div class="bg-[#131b2e] p-3 rounded-xl flex justify-between items-center">
+                            <span class="text-slate-400">tran***@gmail.com</span>
+                            <span class="font-semibold text-red-400">Đã mua 10 Gmail 2FA</span>
+                            <span class="text-slate-500 text-[11px]">5 phút trước</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Stats -->
+                <div class="bg-[#0b111e] border border-slate-800 rounded-3xl p-6 space-y-4 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-bold text-base text-white">Thống kê hệ thống</h3>
+                        <p class="text-xs text-slate-400">Số lượng tài nguyên, khách hàng</p>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between text-xs">
+                            <span class="text-slate-400">Tài nguyên hiện có:</span>
+                            <span class="font-bold text-emerald-400">12,450 acc</span>
+                        </div>
+                        <div class="flex justify-between text-xs">
+                            <span class="text-slate-400">Đơn hàng hoàn tất:</span>
+                            <span class="font-bold text-blue-400">89,120</span>
+                        </div>
+                        <div class="flex justify-between text-xs">
+                            <span class="text-slate-400">Hệ thống xử lý:</span>
+                            <span class="font-bold text-purple-400">Tự động 100%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- SECTION 2: OTP FETCHER -->
+        <section id="sectionOtp" class="hidden max-w-xl mx-auto space-y-4">
+            <div class="bg-[#0b111e] border border-slate-800 p-6 rounded-3xl shadow-xl space-y-4">
+                <h2 class="text-base font-bold text-white flex items-center gap-2">🔗 Shopee Link & OTP Fetcher</h2>
+                <input type="text" id="fetchInputEmail" placeholder="Nhập tên hoặc địa chỉ Email..." class="w-full px-4 py-3 bg-[#131b2e] border border-slate-800 rounded-xl text-xs focus:outline-none text-slate-200">
+                <button id="btnFetchOtp" onclick="fetchOtpLink(this)" class="w-full py-3 bg-blue-600 hover:bg-blue-500 font-bold text-xs rounded-xl text-white transition">Lấy Link Xác Thực / OTP</button>
+                <div id="fetchResult" class="text-xs"></div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: ORDERS MANAGEMENT -->
+        <section id="sectionOrders" class="hidden space-y-6">
+            <div class="bg-[#0b111e] border border-slate-800 p-6 rounded-3xl space-y-4">
+                <h2 class="text-base font-bold text-white flex items-center gap-2">📦 Quản Lý Đơn Hàng Shopee</h2>
+                
+                <div class="flex gap-2 bg-[#131b2e] p-1 rounded-xl border border-slate-800">
+                    <button id="tabBtnSingle" onclick="switchDepositTab('single')" class="flex-1 py-2 rounded-lg text-xs font-bold bg-blue-600 text-white">Nạp 1 Đơn</button>
+                    <button id="tabBtnMultiple" onclick="switchDepositTab('multiple')" class="flex-1 py-2 rounded-lg text-xs font-bold text-slate-400">Nạp Nhiều Đơn</button>
+                </div>
+
+                <div id="depositSingleForm" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <input type="text" id="inputOrderCode" placeholder="Mã đơn hàng Shopee" class="px-4 py-2.5 bg-[#131b2e] border border-slate-800 rounded-xl text-xs text-slate-200">
+                    <input type="text" id="inputProductName" placeholder="Tên sản phẩm" class="px-4 py-2.5 bg-[#131b2e] border border-slate-800 rounded-xl text-xs text-slate-200">
+                    <input type="number" id="inputAmount" placeholder="Số tiền thanh toán (VNĐ)" class="px-4 py-2.5 bg-[#131b2e] border border-slate-800 rounded-xl text-xs text-slate-200">
+                    <input type="text" id="inputEmail" placeholder="Email hòm thư iCloud" class="px-4 py-2.5 bg-[#131b2e] border border-slate-800 rounded-xl text-xs text-slate-200">
+                    <button id="btnAddSingleOrder" onclick="addNewOrder(this)" class="md:col-span-2 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs rounded-xl">Nạp Đơn Vào Hệ Thống</button>
+                </div>
+
+                <div id="depositMultipleForm" class="hidden space-y-3">
+                    <textarea id="inputMultipleLines" placeholder="Mã Đơn | Email | Tên SP | Số tiền (Mỗi dòng 1 đơn)" class="w-full h-28 px-4 py-3 bg-[#131b2e] border border-slate-800 rounded-xl text-xs text-slate-200 font-mono"></textarea>
+                    <button id="btnAddMultiOrder" onclick="addMultipleOrders(this)" class="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs rounded-xl">Nạp Hàng Loạt</button>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <div class="flex flex-col sm:flex-row justify-between gap-3">
+                    <div class="flex gap-2">
+                        <button id="orderTab-all" onclick="switchOrderTab('all')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-blue-600 text-white">Tất cả</button>
+                        <button id="orderTab-completed" onclick="switchOrderTab('completed')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-[#0b111e] border border-slate-800 text-slate-400">Đã giao</button>
+                        <button id="orderTab-pending" onclick="switchOrderTab('pending')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-[#0b111e] border border-slate-800 text-slate-400">Đang chờ</button>
+                    </div>
+                    <button id="btnCheckAllOrders" onclick="checkAllOrders(this)" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl">⚡ Quét Trạng Thái Báo Cáo</button>
+                </div>
+
+                <input type="text" id="searchOrderInput" placeholder="🔍 Tìm kiếm nhanh mã đơn hoặc tên sản phẩm..." oninput="handleSearchInput()" class="w-full px-4 py-2.5 bg-[#0b111e] border border-slate-800 rounded-xl text-xs text-slate-200">
+
+                <div id="orderListContainer" class="space-y-3"></div>
+                <div id="orderPagination" class="flex justify-center gap-2 items-center text-xs text-slate-400"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Custom Modal Overlay -->
+    <div id="customModalOverlay" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div id="customModalBox" class="bg-[#0b111e] border border-slate-800 w-full max-w-md rounded-3xl p-6 shadow-2xl text-center space-y-4">
+            <h3 id="modalTitle" class="text-base font-bold text-blue-500">Thông Báo</h3>
+            <div id="modalMessage" class="text-xs text-slate-300 leading-relaxed text-left max-h-80 overflow-y-auto">Nội dung...</div>
+            <div class="flex gap-3 pt-2" id="modalButtonsContainer">
+                <button id="modalBtnCancel" onclick="closeModal(false)" class="flex-1 py-2.5 bg-slate-800 text-slate-300 rounded-xl font-bold text-xs">Đóng</button>
+                <button id="modalBtnOk" onclick="closeModal(true)" class="flex-1 py-2.5 bg-blue-600 text-white rounded-xl font-bold text-xs">Xác Nhận</button>
+            </div>
         </div>
-        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/80 flex justify-between items-center">
-          <div>
-            <div class="font-semibold text-sm">BM350 Kháng XNMS</div>
-            <div class="text-xs text-emerald-400 font-medium">Còn lại: 28</div>
-          </div>
-          <div class="text-right">
-            <div class="text-sm font-bold text-indigo-400">120.000đ</div>
-            <button class="mt-1 px-3 py-1 bg-indigo-600 text-xs rounded-md font-medium hover:bg-indigo-500">Mua</button>
-          </div>
-        </div>
-      </div>
     </div>
 
-    <!-- 2. GMAIL -->
-    <div id="gmail" class="bg-slate-900 border border-slate-800 rounded-2xl p-5 hover:border-red-500/50 transition">
-      <div class="flex items-center gap-3 mb-4">
-        <div class="w-10 h-10 rounded-xl bg-red-600/20 text-red-400 flex items-center justify-center font-bold text-lg">M</div>
-        <div>
-          <h2 class="font-bold text-lg text-slate-100">Tài Nguyên Gmail</h2>
-          <p class="text-xs text-slate-400">Gmail cổ, Gmail 2FA, Ngoại</p>
-        </div>
-      </div>
-      <div class="space-y-3">
-        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/80 flex justify-between items-center">
-          <div>
-            <div class="font-semibold text-sm">Gmail Cổ 2FA + Khôi phục</div>
-            <div class="text-xs text-emerald-400 font-medium">Còn lại: 520</div>
-          </div>
-          <div class="text-right">
-            <div class="text-sm font-bold text-indigo-400">12.000đ</div>
-            <button class="mt-1 px-3 py-1 bg-indigo-600 text-xs rounded-md font-medium hover:bg-indigo-500">Mua</button>
-          </div>
-        </div>
-        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/80 flex justify-between items-center">
-          <div>
-            <div class="font-semibold text-sm">Gmail New Reg Hand 100%</div>
-            <div class="text-xs text-emerald-400 font-medium">Còn lại: 1.200</div>
-          </div>
-          <div class="text-right">
-            <div class="text-sm font-bold text-indigo-400">4.500đ</div>
-            <button class="mt-1 px-3 py-1 bg-indigo-600 text-xs rounded-md font-medium hover:bg-indigo-500">Mua</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- JavaScript Backend Supabase Logic -->
+    <script>
+        function escapeHtml(unsafe) {
+            if (unsafe === null || unsafe === undefined) return '';
+            return String(unsafe).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        }
 
-    <!-- 3. TIKTOK -->
-    <div id="tiktok" class="bg-slate-900 border border-slate-800 rounded-2xl p-5 hover:border-pink-500/50 transition">
-      <div class="flex items-center gap-3 mb-4">
-        <div class="w-10 h-10 rounded-xl bg-pink-600/20 text-pink-400 flex items-center justify-center font-bold text-lg">TK</div>
-        <div>
-          <h2 class="font-bold text-lg text-slate-100">Tài Nguyên TikTok</h2>
-          <p class="text-xs text-slate-400">Acc Follow, TikTok Ads, Via</p>
-        </div>
-      </div>
-      <div class="space-y-3">
-        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/80 flex justify-between items-center">
-          <div>
-            <div class="font-semibold text-sm">Acc TikTok 1k - 5k Follow</div>
-            <div class="text-xs text-emerald-400 font-medium">Còn lại: 45</div>
-          </div>
-          <div class="text-right">
-            <div class="text-sm font-bold text-indigo-400">85.000đ</div>
-            <button class="mt-1 px-3 py-1 bg-indigo-600 text-xs rounded-md font-medium hover:bg-indigo-500">Mua</button>
-          </div>
-        </div>
-        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/80 flex justify-between items-center">
-          <div>
-            <div class="font-semibold text-sm">TikTok Agency Ads BCN</div>
-            <div class="text-xs text-emerald-400 font-medium">Còn lại: 12</div>
-          </div>
-          <div class="text-right">
-            <div class="text-sm font-bold text-indigo-400">150.000đ</div>
-            <button class="mt-1 px-3 py-1 bg-indigo-600 text-xs rounded-md font-medium hover:bg-indigo-500">Mua</button>
-          </div>
-        </div>
-      </div>
-    </div>
+        function formatCurrency(amount) {
+            const val = Number(amount) || 0;
+            return val.toLocaleString('vi-VN') + 'đ';
+        }
 
-    <!-- 4. SHOPEE -->
-    <div id="shopee" class="bg-slate-900 border border-slate-800 rounded-2xl p-5 hover:border-orange-500/50 transition">
-      <div class="flex items-center gap-3 mb-4">
-        <div class="w-10 h-10 rounded-xl bg-orange-600/20 text-orange-400 flex items-center justify-center font-bold text-lg">SP</div>
-        <div>
-          <h2 class="font-bold text-lg text-slate-100">Tài Nguyên Shopee</h2>
-          <p class="text-xs text-slate-400">Acc Shopee, Clone, Đặt đơn</p>
-        </div>
-      </div>
-      <div class="space-y-3">
-        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/80 flex justify-between items-center">
-          <div>
-            <div class="font-semibold text-sm">Acc Shopee Trắng (Ngâm 30 ngày)</div>
-            <div class="text-xs text-emerald-400 font-medium">Còn lại: 310</div>
-          </div>
-          <div class="text-right">
-            <div class="text-sm font-bold text-indigo-400">8.000đ</div>
-            <button class="mt-1 px-3 py-1 bg-indigo-600 text-xs rounded-md font-medium hover:bg-indigo-500">Mua</button>
-          </div>
-        </div>
-        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/80 flex justify-between items-center">
-          <div>
-            <div class="font-semibold text-sm">Shopee Có Vouchers/Xu</div>
-            <div class="text-xs text-emerald-400 font-medium">Còn lại: 85</div>
-          </div>
-          <div class="text-right">
-            <div class="text-sm font-bold text-indigo-400">25.000đ</div>
-            <button class="mt-1 px-3 py-1 bg-indigo-600 text-xs rounded-md font-medium hover:bg-indigo-500">Mua</button>
-          </div>
-        </div>
-      </div>
-    </div>
+        function debounce(func, timeout = 300) {
+            let timer;
+            return (...args) => { clearTimeout(timer); timer = setTimeout(() => { func.apply(this, args); }, timeout); };
+        }
 
-  </main>
+        const SUPABASE_URL = "https://hsdbjzkxbdezysxwwtaw.supabase.co";
+        const SUPABASE_ANON_KEY = "sb_publishable_LIeDI4UVn7MEo5vURP05hA_TM4h0vFd";
+        const TURNSTILE_SITE_KEY = "0x4AAAAAAEzlm3TdqjzI-LxQ";
+        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  <!-- Footer -->
-  <footer class="border-t border-slate-800 bg-slate-900/50 py-8 text-center text-xs text-slate-500 mt-auto">
-    <p>© 2026 KHO TÀI NGUYÊN MMO. Hệ thống tự động tối ưu chuẩn SEO & Bảo mật.</p>
-  </footer>
+        let currentUser = null;
+        let currentUserMember = null;
+        let modalCallback = null;
+        let cachedOrders = [];
+        let currentCategory = 'Shopee';
+        let realtimeChannel = null;
 
+        let currentOrderTab = 'all';
+        let currentOrderPage = 1;
+        const ordersPerPage = 5;
+
+        let loginWidgetId = null;
+        let regWidgetId = null;
+
+        const handleSearchInput = debounce(() => filterOrders(true));
+
+        async function subscribeOrderRealtime() {
+            if (!currentUser) return;
+            if (realtimeChannel) { await _supabase.removeChannel(realtimeChannel); realtimeChannel = null; }
+            realtimeChannel = _supabase.channel('realtime_shopee_orders_' + currentUser.id).on('postgres_changes', { event: '*', schema: 'public', table: 'shopee_orders', filter: `user_id=eq.${currentUser.id}` }, () => { loadOrdersFromSupabase(); }).subscribe();
+        }
+
+        function switchMainTab(tabName) {
+            document.getElementById("sectionMarket").classList.add("hidden");
+            document.getElementById("sectionOtp").classList.add("hidden");
+            document.getElementById("sectionOrders").classList.add("hidden");
+
+            if (tabName === 'market') document.getElementById("sectionMarket").classList.remove("hidden");
+            else if (tabName === 'otp') document.getElementById("sectionOtp").classList.remove("hidden");
+            else if (tabName === 'orders') document.getElementById("sectionOrders").classList.remove("hidden");
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showModal(title, message, isConfirm = false, callback = null, customHtml = null) {
+            document.getElementById("modalTitle").innerText = title;
+            let msgDiv = document.getElementById("modalMessage");
+            if (customHtml) msgDiv.innerHTML = customHtml; else msgDiv.innerText = message;
+            modalCallback = callback;
+            let cancelBtn = document.getElementById("modalBtnCancel");
+            let okBtn = document.getElementById("modalBtnOk");
+            if (isConfirm) { cancelBtn.style.display = "block"; okBtn.style.display = "block"; } 
+            else { cancelBtn.style.display = "block"; cancelBtn.innerText = "Đóng"; okBtn.style.display = "none"; }
+            document.getElementById("customModalOverlay").style.display = "flex";
+        }
+
+        function closeModal(result) {
+            document.getElementById("customModalOverlay").style.display = "none";
+            if (modalCallback) modalCallback(result);
+        }
+
+        async function updateAuthUI() {
+            const userActions = document.getElementById("headerUserActions");
+            const walletBox = document.getElementById("headerWalletBox");
+            const { data: { user } } = await _supabase.auth.getUser();
+            currentUser = user;
+
+            if (currentUser) {
+                const { data: member } = await _supabase.from('members').select('*').eq('id', currentUser.id).maybeSingle();
+                currentUserMember = member;
+                const displayName = escapeHtml(member?.username || currentUser.email);
+                const balance = member?.balance || 0;
+
+                userActions.innerHTML = `
+                    <span class="text-xs font-bold text-slate-300 hidden sm:inline">${displayName}</span>
+                    <button class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 border border-slate-700" onclick="logout()">Thoát</button>
+                `;
+                walletBox.innerHTML = `
+                    <div>💵 Ví: <b class="text-emerald-400 font-extrabold">${formatCurrency(balance)}</b></div>
+                    <button class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs" onclick="showModal('Nạp Tiền', 'Bank: MB Bank\\nSTK: 0972950246\\nTên: Admin MMO\\nNội dung CK: napvi ${displayName}')">➕ Nạp</button>
+                `;
+                loadStoreData(); loadOrdersFromSupabase(); subscribeOrderRealtime();
+            } else {
+                if (realtimeChannel) { await _supabase.removeChannel(realtimeChannel); realtimeChannel = null; }
+                currentUserMember = null;
+                userActions.innerHTML = `
+                    <button class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-white border border-slate-700" onclick="openLogin()">Đăng nhập</button>
+                    <button class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-xs font-bold text-white shadow-lg shadow-blue-500/30" onclick="openRegister()">Đăng ký</button>
+                `;
+                walletBox.innerHTML = `<div>Chưa đăng nhập.</div>`;
+                loadStoreData();
+            }
+        }
+
+        function renderTurnstileWidget(containerId, callback) {
+            const container = document.getElementById(containerId);
+            if (!container) return; container.innerHTML = '';
+            let attempts = 0;
+            const checkAndRender = setInterval(() => {
+                attempts++;
+                if (typeof turnstile !== 'undefined') { clearInterval(checkAndRender); const widgetId = turnstile.render('#' + containerId, { sitekey: TURNSTILE_SITE_KEY }); callback(widgetId); }
+                else if (attempts > 30) { clearInterval(checkAndRender); container.innerHTML = '<span style="color:red; font-size:11px;">Không thể tải Captcha.</span>'; }
+            }, 100);
+        }
+
+        function openLogin() {
+            loginWidgetId = null;
+            showModal("ĐĂNG NHẬP", "", true, handleLogin, `
+                <div class="space-y-3">
+                    <input type="email" id="popEmail" placeholder="Nhập Email đăng nhập..." class="w-full px-4 py-2.5 bg-[#131b2e] border border-slate-800 rounded-xl text-xs text-slate-200">
+                    <input type="password" id="popPass" placeholder="Mật khẩu..." class="w-full px-4 py-2.5 bg-[#131b2e] border border-slate-800 rounded-xl text-xs text-slate-200">
+                    <div class="flex justify-center" id="turnstile-login-container"></div>
+                </div>
+            `);
+            renderTurnstileWidget('turnstile-login-container', (wId) => { loginWidgetId = wId; });
+        }
+
+        async function handleLogin(res) {
+            if(!res) return;
+            let email = document.getElementById("popEmail").value.trim();
+            let pass = document.getElementById("popPass").value.trim();
+            let captchaToken = (loginWidgetId !== null && typeof turnstile !== 'undefined') ? turnstile.getResponse(loginWidgetId) : null;
+            if (!captchaToken) { showModal("Lỗi", "Vui lòng xác thực Captcha!"); return; }
+            const { error } = await _supabase.auth.signInWithPassword({ email: email, password: pass, options: { captchaToken: captchaToken } });
+            if (error) { showModal("Lỗi", error.message.includes('Invalid login credentials') ? "Sai tài khoản hoặc mật khẩu!" : escapeHtml(error.message)); return; }
+            await updateAuthUI(); showModal("Thành công", "Đăng nhập thành công!");
+        }
+
+        function openRegister() {
+            regWidgetId = null;
+            showModal("ĐĂNG KÝ", "", true, handleReg, `
+                <div class="space-y-3">
+                    <input type="text" id="regUser" placeholder="Tên đăng nhập..." class="w-full px-4 py-2.5 bg-[#131b2e] border border-slate-800 rounded-xl text-xs text-slate-200">
+                    <input type="email" id="regEmail" placeholder="Email của bạn..." class="w-full px-4 py-2.5 bg-[#131b2e] border border-slate-800 rounded-xl text-xs text-slate-200">
+                    <input type="password" id="regPass" placeholder="Mật khẩu..." class="w-full px-4 py-2.5 bg-[#131b2e] border border-slate-800 rounded-xl text-xs text-slate-200">
+                    <input type="password" id="regPassConfirm" placeholder="Nhập lại mật khẩu..." class="w-full px-4 py-2.5 bg-[#131b2e] border border-slate-800 rounded-xl text-xs text-slate-200">
+                    <div class="flex justify-center" id="turnstile-reg-container"></div>
+                </div>
+            `);
+            renderTurnstileWidget('turnstile-reg-container', (wId) => { regWidgetId = wId; });
+        }
+
+        async function handleReg(res) {
+            if(!res) return;
+            let username = document.getElementById("regUser").value.trim();
+            let email = document.getElementById("regEmail").value.trim();
+            let pass = document.getElementById("regPass").value.trim();
+            let passConfirm = document.getElementById("regPassConfirm").value.trim();
+            let captchaToken = (regWidgetId !== null && typeof turnstile !== 'undefined') ? turnstile.getResponse(regWidgetId) : null;
+            if (!username || !email || !pass || !captchaToken || pass !== passConfirm) { showModal("Lỗi", "Vui lòng kiểm tra lại thông tin!"); return; }
+            const { error } = await _supabase.auth.signUp({ email: email, password: pass, options: { captchaToken: captchaToken, data: { username: username } } });
+            if (error) { showModal("Lỗi", escapeHtml(error.message)); return; }
+            showModal("Thành công", "Đăng ký thành công, hãy đăng nhập.");
+        }
+
+        async function logout() {
+            if (realtimeChannel) { await _supabase.removeChannel(realtimeChannel); realtimeChannel = null; }
+            await _supabase.auth.signOut(); cachedOrders = []; document.getElementById("orderListContainer").innerHTML = ""; await updateAuthUI();
+        }
+
+        function switchCategory(cat) {
+            currentCategory = cat;
+            document.getElementById("currentCategoryTitle").innerText = `Danh Sách Tài Khoản ${cat}`;
+            if(cat === 'my') {
+                document.getElementById("marketList").style.display = "none";
+                document.getElementById("myAccList").style.display = "block";
+            } else {
+                document.getElementById("marketList").style.display = "grid";
+                document.getElementById("myAccList").style.display = "none";
+            }
+            loadStoreData();
+            document.getElementById("detailedStoreArea").scrollIntoView({ behavior: 'smooth' });
+        }
+
+        async function loadStoreData() {
+            if (currentCategory !== 'my') {
+                const { data: marketData } = await _supabase.from('mmo_accounts').select('*').eq('status', 'Đang bán').eq('platform', currentCategory);
+                let marketHtml = '';
+                if(marketData && marketData.length > 0) {
+                    let grouped = {};
+                    marketData.forEach(item => {
+                        let groupKey = `${item.platform}_${item.price}`;
+                        if (!grouped[groupKey]) grouped[groupKey] = { title: escapeHtml(item.title || `Tài khoản ${item.platform}`), price: item.price, description: escapeHtml(item.description || "Mô tả sản phẩm."), platform: escapeHtml(item.platform), items: [] };
+                        grouped[groupKey].items.push(item);
+                    });
+                    for (let key in grouped) {
+                        let group = grouped[key];
+                        let stockCount = group.items.length;
+                        let firstId = group.items[0].id;
+                        let uniqueBuyId = `buy_${group.platform}_${group.price}_${firstId}`;
+                        marketHtml += `
+                            <div class="bg-[#131b2e] border border-slate-800 rounded-2xl p-4 space-y-3">
+                                <div>
+                                    <h4 class="font-bold text-sm text-slate-100">${group.title}</h4>
+                                    <p class="text-xs text-slate-400 mt-1">Giá: <b class="text-blue-400">${formatCurrency(group.price)}</b> | Kho: <b class="${stockCount > 0 ? 'text-emerald-400' : 'text-red-400'}">${stockCount} sẵn có</b></p>
+                                </div>
+                                <div class="bg-[#0b111e] p-2.5 rounded-xl border border-slate-800 text-xs text-slate-400">${group.description}</div>
+                                <div class="flex gap-2 items-center">
+                                    <input type="number" id="qty_${uniqueBuyId}" value="1" min="1" max="${stockCount}" class="w-16 px-2 py-2 bg-[#0b111e] border border-blue-500/50 rounded-xl text-center text-xs font-bold text-slate-200">
+                                    <button id="btn_${uniqueBuyId}" ${stockCount === 0 ? 'disabled' : ''} onclick="buyGroupAccounts('${group.platform}', ${group.price}, ${stockCount}, '${uniqueBuyId}', this)" class="flex-1 py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs rounded-xl shadow-lg shadow-blue-600/30">🛒 Mua Ngay</button>
+                                </div>
+                            </div>`;
+                    }
+                } else { marketHtml = `<div class="col-span-full text-center py-8 text-slate-500 text-xs">Danh mục ${escapeHtml(currentCategory)} hiện chưa có tài khoản nào.</div>`; }
+                document.getElementById("marketList").innerHTML = marketHtml;
+            }
+
+            if (!currentUser) {
+                document.getElementById("myAccList").innerHTML = `<div class="text-center py-8 text-slate-500 text-xs">Vui lòng đăng nhập để xem danh sách tài khoản đã mua.</div>`;
+                return;
+            }
+
+            const { data: resMyData } = await _supabase.rpc('get_user_orders');
+            const myData = (resMyData && resMyData.success) ? resMyData.orders : [];
+            let myInnerHtml = '';
+            if(myData && myData.length > 0) {
+                myData.forEach(item => {
+                    myInnerHtml += `
+                        <div class="bg-[#131b2e] border border-slate-800 rounded-2xl p-4 mb-3 space-y-2">
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="font-bold text-slate-200">Đơn mua #${item.id}</span>
+                                <span class="text-emerald-400 font-bold">${formatCurrency(item.price)}</span>
+                            </div>
+                            <textarea readonly class="w-full bg-[#0b111e] text-red-400 font-mono text-xs p-3 rounded-xl border border-slate-800 resize-none">${escapeHtml(item.account_details)}</textarea>
+                        </div>`;
+                });
+            } else { myInnerHtml = `<div class="text-center py-8 text-slate-500 text-xs">Bạn chưa mua tài khoản nào.</div>`; }
+            document.getElementById("myAccList").innerHTML = myInnerHtml;
+        }
+
+        async function buyGroupAccounts(platform, price, maxStock, uniqueId, btnEl) {
+            if (!currentUser) { showModal("Thông báo", "Vui lòng đăng nhập để mua!"); return; }
+            let qtyInput = document.getElementById(`qty_${uniqueId}`);
+            let qty = parseInt(qtyInput ? qtyInput.value : 1, 10) || 1;
+            if (qty > maxStock) { showModal("Lỗi", `Kho chỉ còn ${maxStock} tài khoản!`); return; }
+
+            showModal("Xác nhận Mua", `Thanh toán ${formatCurrency(price * qty)} cho ${qty} tài khoản này?`, true, async (res) => {
+                if (!res) return;
+                const { data, error } = await _supabase.rpc('mua_tai_khoan', { p_platform: platform, p_qty: qty });
+                if (error || !data.success) { showModal("Lỗi", escapeHtml(error?.message || data?.message)); return; }
+                updateAuthUI(); loadStoreData();
+                showModal("Mua thành công", "Đã nhận tài khoản vào ví của bạn!");
+            });
+        }
+
+        async function fetchOtpLink(btnEl) {
+            let val = document.getElementById("fetchInputEmail").value.trim();
+            if (!val) return;
+            try {
+                let response = await fetch('/api/otp?hide=' + encodeURIComponent(val));
+                let data = await response.json();
+                if (data.status === "success") {
+                    document.getElementById("fetchResult").innerHTML = `<div class="bg-[#131b2e] p-3 rounded-xl border border-blue-500/50"><b>OTP:</b> <span class="text-blue-400 font-bold text-sm">${escapeHtml(data.otp)}</span></div>`;
+                }
+            } catch (e) {}
+        }
+
+        function switchDepositTab(type) {
+            document.getElementById("depositSingleForm").style.display = type === 'single' ? 'grid' : 'none';
+            document.getElementById("depositMultipleForm").style.display = type === 'multiple' ? 'block' : 'none';
+        }
+
+        async function addNewOrder() {
+            if(!currentUser) return;
+            let c = document.getElementById("inputOrderCode").value.trim();
+            let e = document.getElementById("inputEmail").value.trim();
+            let n = document.getElementById("inputProductName").value.trim() || 'Đơn Shopee';
+            let a = parseInt(document.getElementById("inputAmount").value, 10) || 0;
+            const { error } = await _supabase.from('shopee_orders').insert({ order_code: c, product_name: n, email: e, amount: a, price: a, user_id: currentUser.id, status: 'Đang chờ giao' });
+            if (!error) { showModal("Thành công", "Đã nạp đơn thành công!"); loadOrdersFromSupabase(); }
+        }
+
+        async function addMultipleOrders() {
+            if(!currentUser) return;
+            let lines = document.getElementById("inputMultipleLines").value.trim().split('\n');
+            let insertData = lines.map(line => {
+                let p = line.split('|').map(x=>x.trim());
+                if (p.length < 2 || !p[0]) return null;
+                return { order_code: p[0], email: p[1] || 'none@icloud.com', product_name: p[2] || 'Đơn Shopee', amount: parseInt(p[3]||0,10), price: parseInt(p[3]||0,10), user_id: currentUser.id, status: 'Đang chờ giao' };
+            }).filter(Boolean);
+            if(insertData.length > 0) {
+                await _supabase.from('shopee_orders').insert(insertData);
+                showModal("Thành công", "Đã nạp hàng loạt thành công!"); loadOrdersFromSupabase();
+            }
+        }
+
+        async function loadOrdersFromSupabase() {
+            if (!currentUser) return;
+            const { data } = await _supabase.from('shopee_orders').select('*').eq('user_id', currentUser.id).order('created_at', { ascending: false });
+            cachedOrders = data || []; filterOrders();
+        }
+
+        function filterOrders(resetPage = false) {
+            let filtered = cachedOrders; renderOrders(filtered);
+        }
+
+        function renderOrders(ordersToRender) {
+            let container = document.getElementById("orderListContainer");
+            if (!ordersToRender || ordersToRender.length === 0) { container.innerHTML = "<div class='text-center text-xs text-slate-500 py-6'>Không có đơn hàng nào</div>"; return; }
+            let html = '';
+            ordersToRender.forEach(o => {
+                html += `<div class="bg-[#0b111e] border border-slate-800 rounded-2xl p-4 flex justify-between items-center text-xs"><div><b>#${escapeHtml(o.order_code)}</b> - ${escapeHtml(o.product_name)}</div><div class="text-blue-400 font-bold">${formatCurrency(o.amount)}</div></div>`;
+            });
+            container.innerHTML = html;
+        }
+
+        function switchOrderTab(tab) { currentOrderTab = tab; filterOrders(true); }
+        function checkAllOrders() { showModal("Thông báo", "Đang tự động quét đơn..."); }
+
+        updateAuthUI();
+    </script>
 </body>
 </html>
