@@ -1,1060 +1,217 @@
 <!DOCTYPE html>
-<html lang="vi" class="dark">
+<html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NK MMO Store - Hệ Thống Tài Nguyên MMO & Dịch Vụ Tự Động</title>
-    <meta name="description" content="NK MMO Store cung cấp tài nguyên Facebook, Gmail, TikTok, Shopee tự động 24/7. Uy tín, bảo hành nhanh chóng.">
-    <meta name="keywords" content="tài nguyên mmo, via facebook, gmail 2fa, acc tiktok, clone shopee">
-    
-    <!-- External SDKs -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            50: '#fbf7f5',
-                            500: '#ee4d2d',
-                            600: '#d73211',
-                            700: '#b82509',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        .my-acc-scroll-box {
-            max-height: 520px;
-            overflow-y: auto;
-            scrollbar-width: thin;
-            scrollbar-color: #334155 #0f172a;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KHO TÀI NGUYÊN MMO - Mua Bán Via FB, Gmail, TikTok, Shopee Tự Động</title>
+  <meta name="description" content="Hệ thống cung cấp tài nguyên Facebook, Gmail, TikTok, Shopee uy tín, tự động 24/7. Giá rẻ, bảo hành sai mã, hỗ trợ nạp tiền và lấy OTP tự động mượt mà.">
+  <meta name="keywords" content="tài nguyên mmo, mua via facebook, mua gmail 2fa, acc tiktok, tài khoản shopee">
+  <link rel="canonical" href="https://khotainguyenmmo.com/">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://khotainguyenmmo.com/">
+  <meta property="og:title" content="KHO TÀI NGUYÊN MMO - Mua Bán Via FB, Gmail, TikTok, Shopee Tự Động">
+  <meta property="og:description" content="Hệ thống cung cấp tài nguyên MMO tự động 24/7. Bảo hành 1 đổi 1, hỗ trợ kỹ thuật nhanh chóng.">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Schema.org Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Kho Tai Nguyen MMO",
+    "url": "https://khotainguyenmmo.com/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://khotainguyenmmo.com/?s={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
 </head>
-<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col antialiased">
+<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col">
 
-    <!-- Header / Navigation -->
-    <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <a href="#" class="text-xl font-extrabold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
-                    ⚡ NK MMO STORE
-                </a>
-            </div>
+  <!-- Header / Navigation -->
+  <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+      <a href="#" class="text-xl font-bold bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent">
+        KHO TÀI NGUYÊN MMO
+      </a>
+      <nav class="hidden md:flex gap-6 text-sm font-medium text-slate-300">
+        <a href="#facebook" class="hover:text-blue-400 transition">Facebook</a>
+        <a href="#gmail" class="hover:text-red-400 transition">Gmail</a>
+        <a href="#tiktok" class="hover:text-pink-400 transition">TikTok</a>
+        <a href="#shopee" class="hover:text-orange-400 transition">Shopee</a>
+        <a href="#nap-tien" class="hover:text-emerald-400 transition">Nạp Tiền</a>
+      </nav>
+      <div class="flex gap-3">
+        <button class="px-4 py-2 text-sm font-medium bg-slate-800 hover:bg-slate-700 rounded-lg border border-slate-700">Đăng Nhập</button>
+        <button class="px-4 py-2 text-sm font-medium bg-indigo-600 hover:bg-indigo-500 rounded-lg shadow-lg shadow-indigo-500/20">Đăng Ký</button>
+      </div>
+    </div>
+  </header>
 
-            <!-- Wallet & Actions -->
-            <div class="flex items-center gap-3">
-                <div id="headerWalletBox" class="hidden sm:flex items-center gap-2 bg-slate-800/80 px-3 py-1.5 rounded-xl border border-slate-700/60 text-xs text-slate-300">
-                    <span>💰 Đang tải số dư...</span>
-                </div>
-                <div id="headerUserActions" class="flex items-center gap-2"></div>
-            </div>
+  <!-- Hero Section -->
+  <section class="py-12 text-center px-4 max-w-4xl mx-auto">
+    <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-100 mb-4">
+      Hệ Thống Cung Cấp Tài Nguyên Tự Động
+    </h1>
+    <p class="text-slate-400 text-base md:text-lg mb-8">
+      Sở hữu tài khoản Facebook, Gmail, TikTok, Shopee chất lượng cao – Bảo hành uy tín – Nạp tiền & Giao hàng tự động 24/7.
+    </p>
+    <div class="relative max-w-xl mx-auto">
+      <input type="text" placeholder="Tìm kiếm nhanh tài nguyên (ví dụ: Via cổ, Gmail 2FA, Shopee...)..." 
+             class="w-full pl-4 pr-12 py-3 bg-slate-900 border border-slate-800 rounded-xl focus:outline-none focus:border-indigo-500 text-sm">
+      <button class="absolute right-3 top-3 text-slate-400 hover:text-white">
+        🔍
+      </button>
+    </div>
+  </section>
+
+  <!-- Main Resource Categories -->
+  <main class="max-w-7xl mx-auto px-4 py-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 flex-1">
+    
+    <!-- 1. FACEBOOK -->
+    <div id="facebook" class="bg-slate-900 border border-slate-800 rounded-2xl p-5 hover:border-blue-500/50 transition">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-blue-600/20 text-blue-400 flex items-center justify-center font-bold text-lg">FB</div>
+        <div>
+          <h2 class="font-bold text-lg text-slate-100">Tài Nguyên Facebook</h2>
+          <p class="text-xs text-slate-400">Via, Clone, BM, Page cổ</p>
         </div>
-    </header>
-
-    <!-- Main Navigation Bar -->
-    <div class="bg-slate-900/50 border-b border-slate-800/80 sticky top-16 z-40">
-        <div class="max-w-7xl mx-auto px-4 py-2.5 flex gap-2 overflow-x-auto">
-            <button id="navBtnMarket" onclick="switchMainTab('market')" class="flex-1 py-2 px-4 rounded-xl text-xs font-bold border transition duration-200 border-brand-500 bg-brand-500/10 text-brand-500 hover:bg-brand-500/20 whitespace-nowrap">
-                🛒 Chợ Tài Khoản MMO
-            </button>
-            <button id="navBtnOtp" onclick="switchMainTab('otp')" class="flex-1 py-2 px-4 rounded-xl text-xs font-bold border transition duration-200 border-slate-800 bg-slate-900 text-slate-400 hover:text-white hover:bg-slate-800 whitespace-nowrap">
-                🔗 Lấy OTP & Link
-            </button>
-            <button id="navBtnOrders" onclick="switchMainTab('orders')" class="flex-1 py-2 px-4 rounded-xl text-xs font-bold border transition duration-200 border-slate-800 bg-slate-900 text-slate-400 hover:text-white hover:bg-slate-800 whitespace-nowrap">
-                📦 Quản Lý Đơn Shopee
-            </button>
+      </div>
+      <div class="space-y-3">
+        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/80 flex justify-between items-center">
+          <div>
+            <div class="font-semibold text-sm">Via Cổ Việt (2010 - 2018)</div>
+            <div class="text-xs text-emerald-400 font-medium">Còn lại: 154</div>
+          </div>
+          <div class="text-right">
+            <div class="text-sm font-bold text-indigo-400">45.000đ</div>
+            <button class="mt-1 px-3 py-1 bg-indigo-600 text-xs rounded-md font-medium hover:bg-indigo-500">Mua</button>
+          </div>
         </div>
+        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/80 flex justify-between items-center">
+          <div>
+            <div class="font-semibold text-sm">BM350 Kháng XNMS</div>
+            <div class="text-xs text-emerald-400 font-medium">Còn lại: 28</div>
+          </div>
+          <div class="text-right">
+            <div class="text-sm font-bold text-indigo-400">120.000đ</div>
+            <button class="mt-1 px-3 py-1 bg-indigo-600 text-xs rounded-md font-medium hover:bg-indigo-500">Mua</button>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- Main Content Container -->
-    <main class="max-w-7xl mx-auto px-4 py-6 flex-1 w-full">
-
-        <!-- SECTION 1: MARKETPLACE -->
-        <section id="sectionMarket" class="space-y-6">
-            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-                <h1 class="text-lg font-bold text-slate-100 flex items-center gap-2">
-                    <span>🛒</span> Danh Mục Tài Nguyên MMO
-                </h1>
-            </div>
-
-            <!-- Sub Category Tabs -->
-            <div class="flex gap-2 overflow-x-auto pb-2 scrollbar-none">
-                <button id="tabShopee" onclick="switchCategory('Shopee')" class="px-4 py-2 rounded-xl text-xs font-bold bg-brand-500 text-white transition shadow-lg shadow-brand-500/20 whitespace-nowrap">Shopee</button>
-                <button id="tabFacebook" onclick="switchCategory('Facebook')" class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-900 text-slate-400 border border-slate-800 hover:border-slate-700 hover:text-white transition whitespace-nowrap">Facebook</button>
-                <button id="tabGmail" onclick="switchCategory('Gmail')" class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-900 text-slate-400 border border-slate-800 hover:border-slate-700 hover:text-white transition whitespace-nowrap">Gmail</button>
-                <button id="tabICloud" onclick="switchCategory('iCloud')" class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-900 text-slate-400 border border-slate-800 hover:border-slate-700 hover:text-white transition whitespace-nowrap">iCloud</button>
-                <button id="tabTiktok" onclick="switchCategory('TikTok')" class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-900 text-slate-400 border border-slate-800 hover:border-slate-700 hover:text-white transition whitespace-nowrap">TikTok</button>
-                <button id="tabMyAcc" onclick="switchCategory('my')" class="px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-600/30 transition whitespace-nowrap">📦 Đã Mua</button>
-            </div>
-
-            <!-- Products Grid & List -->
-            <div id="marketList" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="col-span-full text-center py-12 text-slate-500 text-sm">Đang tải danh sách sản phẩm...</div>
-            </div>
-            <div id="myAccList" class="hidden"></div>
-        </section>
-
-        <!-- SECTION 2: OTP FETCHER -->
-        <section id="sectionOtp" class="hidden max-w-xl mx-auto space-y-4">
-            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl">
-                <h2 class="text-base font-bold text-slate-100 mb-4 flex items-center gap-2">
-                    <span>🔗</span> Shopee Link & OTP Fetcher
-                </h2>
-                <div class="space-y-3">
-                    <input type="text" id="fetchInputEmail" placeholder="Nhập tên hoặc địa chỉ Email..." class="w-full px-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-xs focus:outline-none focus:border-brand-500 text-slate-200">
-                    <button id="btnFetchOtp" onclick="fetchOtpLink(this)" class="w-full py-3 bg-brand-500 hover:bg-brand-600 font-bold text-xs rounded-xl shadow-lg shadow-brand-500/20 text-white transition">
-                        Lấy Link Xác Thực / OTP
-                    </button>
-                </div>
-                <div id="fetchResult" class="mt-4 text-xs"></div>
-            </div>
-        </section>
-
-        <!-- SECTION 3: ORDERS MANAGEMENT -->
-        <section id="sectionOrders" class="hidden space-y-6">
-            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl">
-                <h2 class="text-base font-bold text-slate-100 mb-4 flex items-center gap-2">
-                    <span>📦</span> Quản Lý Đơn Hàng Shopee
-                </h2>
-
-                <!-- Sub Tab Forms -->
-                <div class="flex gap-2 mb-4 bg-slate-950 p-1 rounded-xl border border-slate-800/80">
-                    <button id="tabBtnSingle" onclick="switchDepositTab('single')" class="flex-1 py-2 rounded-lg text-xs font-bold bg-brand-500 text-white transition">Nạp 1 Đơn</button>
-                    <button id="tabBtnMultiple" onclick="switchDepositTab('multiple')" class="flex-1 py-2 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition">Nạp Nhiều Đơn</button>
-                </div>
-
-                <!-- Single Form -->
-                <div id="depositSingleForm" class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <input type="text" id="inputOrderCode" placeholder="Mã đơn hàng Shopee" class="px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-xs focus:border-brand-500 focus:outline-none text-slate-200">
-                    <input type="text" id="inputProductName" placeholder="Tên sản phẩm" class="px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-xs focus:border-brand-500 focus:outline-none text-slate-200">
-                    <input type="number" id="inputAmount" placeholder="Số tiền thanh toán (VNĐ) - Ví dụ: 50000" class="px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-xs focus:border-brand-500 focus:outline-none text-slate-200">
-                    <input type="text" id="inputEmail" placeholder="Email hòm thư iCloud" class="px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-xs focus:border-brand-500 focus:outline-none text-slate-200">
-                    <button id="btnAddSingleOrder" onclick="addNewOrder(this)" class="md:col-span-2 py-3 bg-brand-500 hover:bg-brand-600 text-white font-bold text-xs rounded-xl shadow-lg shadow-brand-500/20 transition">Nạp Đơn Vào Hệ Thống</button>
-                </div>
-
-                <!-- Multiple Form -->
-                <div id="depositMultipleForm" class="hidden space-y-3">
-                    <textarea id="inputMultipleLines" placeholder="Mã Đơn | Email | Tên SP | Số tiền (Mỗi dòng 1 đơn)" class="w-full h-28 px-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-xs focus:border-brand-500 focus:outline-none text-slate-200 font-mono"></textarea>
-                    <button id="btnAddMultiOrder" onclick="addMultipleOrders(this)" class="w-full py-3 bg-brand-500 hover:bg-brand-600 text-white font-bold text-xs rounded-xl shadow-lg shadow-brand-500/20 transition">Nạp Hàng Loạt</button>
-                </div>
-            </div>
-
-            <!-- Filter & Orders List -->
-            <div class="space-y-4">
-                <div class="flex flex-col sm:flex-row justify-between gap-3">
-                    <div class="flex gap-2">
-                        <button id="orderTab-all" onclick="switchOrderTab('all')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-brand-500 text-white">Tất cả</button>
-                        <button id="orderTab-completed" onclick="switchOrderTab('completed')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-900 border border-slate-800 text-slate-400">Đã giao</button>
-                        <button id="orderTab-pending" onclick="switchOrderTab('pending')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-900 border border-slate-800 text-slate-400">Đang chờ</button>
-                    </div>
-                    <button id="btnCheckAllOrders" onclick="checkAllOrders(this)" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl shadow-lg shadow-emerald-600/20 transition">⚡ Quét Trạng Thái Báo Cáo</button>
-                </div>
-
-                <input type="text" id="searchOrderInput" placeholder="🔍 Tìm kiếm nhanh mã đơn hoặc tên sản phẩm..." oninput="handleSearchInput()" class="w-full px-4 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-xs focus:border-brand-500 focus:outline-none text-slate-200">
-
-                <div id="orderListContainer" class="space-y-3"></div>
-                <div id="orderPagination" class="flex justify-center gap-2 items-center text-xs text-slate-400"></div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Custom Modal Overlay -->
-    <div id="customModalOverlay" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
-        <div id="customModalBox" class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-2xl p-6 shadow-2xl text-center space-y-4">
-            <h3 id="modalTitle" class="text-base font-bold text-brand-500">Thông Báo</h3>
-            <div id="modalMessage" class="text-xs text-slate-300 leading-relaxed text-left max-h-80 overflow-y-auto">Nội dung...</div>
-            <div class="flex gap-3 pt-2" id="modalButtonsContainer">
-                <button id="modalBtnCancel" onclick="closeModal(false)" class="flex-1 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl font-bold text-xs transition">Đóng</button>
-                <button id="modalBtnOk" onclick="closeModal(true)" class="flex-1 py-2.5 bg-brand-500 hover:bg-brand-600 text-white rounded-xl font-bold text-xs shadow-lg shadow-brand-500/20 transition">Xác Nhận</button>
-            </div>
+    <!-- 2. GMAIL -->
+    <div id="gmail" class="bg-slate-900 border border-slate-800 rounded-2xl p-5 hover:border-red-500/50 transition">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-red-600/20 text-red-400 flex items-center justify-center font-bold text-lg">M</div>
+        <div>
+          <h2 class="font-bold text-lg text-slate-100">Tài Nguyên Gmail</h2>
+          <p class="text-xs text-slate-400">Gmail cổ, Gmail 2FA, Ngoại</p>
         </div>
+      </div>
+      <div class="space-y-3">
+        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/80 flex justify-between items-center">
+          <div>
+            <div class="font-semibold text-sm">Gmail Cổ 2FA + Khôi phục</div>
+            <div class="text-xs text-emerald-400 font-medium">Còn lại: 520</div>
+          </div>
+          <div class="text-right">
+            <div class="text-sm font-bold text-indigo-400">12.000đ</div>
+            <button class="mt-1 px-3 py-1 bg-indigo-600 text-xs rounded-md font-medium hover:bg-indigo-500">Mua</button>
+          </div>
+        </div>
+        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/80 flex justify-between items-center">
+          <div>
+            <div class="font-semibold text-sm">Gmail New Reg Hand 100%</div>
+            <div class="text-xs text-emerald-400 font-medium">Còn lại: 1.200</div>
+          </div>
+          <div class="text-right">
+            <div class="text-sm font-bold text-indigo-400">4.500đ</div>
+            <button class="mt-1 px-3 py-1 bg-indigo-600 text-xs rounded-md font-medium hover:bg-indigo-500">Mua</button>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- JavaScript Logic (Giữ nguyên toàn bộ logic API và Supabase của bạn) -->
-    <script>
-        function escapeHtml(unsafe) {
-            if (unsafe === null || unsafe === undefined) return '';
-            return String(unsafe)
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/"/g, "&quot;")
-                .replace(/'/g, "&#039;");
-        }
+    <!-- 3. TIKTOK -->
+    <div id="tiktok" class="bg-slate-900 border border-slate-800 rounded-2xl p-5 hover:border-pink-500/50 transition">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-pink-600/20 text-pink-400 flex items-center justify-center font-bold text-lg">TK</div>
+        <div>
+          <h2 class="font-bold text-lg text-slate-100">Tài Nguyên TikTok</h2>
+          <p class="text-xs text-slate-400">Acc Follow, TikTok Ads, Via</p>
+        </div>
+      </div>
+      <div class="space-y-3">
+        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/80 flex justify-between items-center">
+          <div>
+            <div class="font-semibold text-sm">Acc TikTok 1k - 5k Follow</div>
+            <div class="text-xs text-emerald-400 font-medium">Còn lại: 45</div>
+          </div>
+          <div class="text-right">
+            <div class="text-sm font-bold text-indigo-400">85.000đ</div>
+            <button class="mt-1 px-3 py-1 bg-indigo-600 text-xs rounded-md font-medium hover:bg-indigo-500">Mua</button>
+          </div>
+        </div>
+        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/80 flex justify-between items-center">
+          <div>
+            <div class="font-semibold text-sm">TikTok Agency Ads BCN</div>
+            <div class="text-xs text-emerald-400 font-medium">Còn lại: 12</div>
+          </div>
+          <div class="text-right">
+            <div class="text-sm font-bold text-indigo-400">150.000đ</div>
+            <button class="mt-1 px-3 py-1 bg-indigo-600 text-xs rounded-md font-medium hover:bg-indigo-500">Mua</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. SHOPEE -->
+    <div id="shopee" class="bg-slate-900 border border-slate-800 rounded-2xl p-5 hover:border-orange-500/50 transition">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-orange-600/20 text-orange-400 flex items-center justify-center font-bold text-lg">SP</div>
+        <div>
+          <h2 class="font-bold text-lg text-slate-100">Tài Nguyên Shopee</h2>
+          <p class="text-xs text-slate-400">Acc Shopee, Clone, Đặt đơn</p>
+        </div>
+      </div>
+      <div class="space-y-3">
+        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/80 flex justify-between items-center">
+          <div>
+            <div class="font-semibold text-sm">Acc Shopee Trắng (Ngâm 30 ngày)</div>
+            <div class="text-xs text-emerald-400 font-medium">Còn lại: 310</div>
+          </div>
+          <div class="text-right">
+            <div class="text-sm font-bold text-indigo-400">8.000đ</div>
+            <button class="mt-1 px-3 py-1 bg-indigo-600 text-xs rounded-md font-medium hover:bg-indigo-500">Mua</button>
+          </div>
+        </div>
+        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/80 flex justify-between items-center">
+          <div>
+            <div class="font-semibold text-sm">Shopee Có Vouchers/Xu</div>
+            <div class="text-xs text-emerald-400 font-medium">Còn lại: 85</div>
+          </div>
+          <div class="text-right">
+            <div class="text-sm font-bold text-indigo-400">25.000đ</div>
+            <button class="mt-1 px-3 py-1 bg-indigo-600 text-xs rounded-md font-medium hover:bg-indigo-500">Mua</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-800 bg-slate-900/50 py-8 text-center text-xs text-slate-500 mt-auto">
+    <p>© 2026 KHO TÀI NGUYÊN MMO. Hệ thống tự động tối ưu chuẩn SEO & Bảo mật.</p>
+  </footer>
 
-        function formatCurrency(amount) {
-            const val = Number(amount) || 0;
-            return val.toLocaleString('vi-VN') + 'đ';
-        }
-
-        function debounce(func, timeout = 300) {
-            let timer;
-            return (...args) => {
-                clearTimeout(timer);
-                timer = setTimeout(() => { func.apply(this, args); }, timeout);
-            };
-        }
-
-        const SUPABASE_URL = "https://hsdbjzkxbdezysxwwtaw.supabase.co";
-        const SUPABASE_ANON_KEY = "sb_publishable_LIeDI4UVn7MEo5vURP05hA_TM4h0vFd";
-        const TURNSTILE_SITE_KEY = "0x4AAAAAAEzlm3TdqjzI-LxQ";
-        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-        let currentUser = null;
-        let currentUserMember = null;
-        let modalCallback = null;
-        let cachedOrders = [];
-        let currentCategory = 'Shopee';
-        let realtimeChannel = null;
-
-        let currentOrderTab = 'all';
-        let currentOrderPage = 1;
-        const ordersPerPage = 5;
-
-        let loginWidgetId = null;
-        let regWidgetId = null;
-
-        const handleSearchInput = debounce(() => filterOrders(true));
-
-        async function subscribeOrderRealtime() {
-            if (!currentUser) return;
-            if (realtimeChannel) {
-                await _supabase.removeChannel(realtimeChannel);
-                realtimeChannel = null;
-            }
-
-            realtimeChannel = _supabase
-                .channel('realtime_shopee_orders_' + currentUser.id)
-                .on('postgres_changes', { 
-                    event: '*', 
-                    schema: 'public', 
-                    table: 'shopee_orders',
-                    filter: `user_id=eq.${currentUser.id}` 
-                }, () => {
-                    loadOrdersFromSupabase();
-                })
-                .subscribe();
-        }
-
-        function switchMainTab(tabName) {
-            document.getElementById("navBtnMarket").className = "flex-1 py-2 px-4 rounded-xl text-xs font-bold border transition duration-200 border-slate-800 bg-slate-900 text-slate-400 hover:text-white whitespace-nowrap";
-            document.getElementById("navBtnOtp").className = "flex-1 py-2 px-4 rounded-xl text-xs font-bold border transition duration-200 border-slate-800 bg-slate-900 text-slate-400 hover:text-white whitespace-nowrap";
-            document.getElementById("navBtnOrders").className = "flex-1 py-2 px-4 rounded-xl text-xs font-bold border transition duration-200 border-slate-800 bg-slate-900 text-slate-400 hover:text-white whitespace-nowrap";
-
-            document.getElementById("sectionMarket").classList.add("hidden");
-            document.getElementById("sectionOtp").classList.add("hidden");
-            document.getElementById("sectionOrders").classList.add("hidden");
-
-            if (tabName === 'market') {
-                document.getElementById("navBtnMarket").className = "flex-1 py-2 px-4 rounded-xl text-xs font-bold border transition duration-200 border-brand-500 bg-brand-500/10 text-brand-500 whitespace-nowrap";
-                document.getElementById("sectionMarket").classList.remove("hidden");
-            } else if (tabName === 'otp') {
-                document.getElementById("navBtnOtp").className = "flex-1 py-2 px-4 rounded-xl text-xs font-bold border transition duration-200 border-brand-500 bg-brand-500/10 text-brand-500 whitespace-nowrap";
-                document.getElementById("sectionOtp").classList.remove("hidden");
-            } else if (tabName === 'orders') {
-                document.getElementById("navBtnOrders").className = "flex-1 py-2 px-4 rounded-xl text-xs font-bold border transition duration-200 border-brand-500 bg-brand-500/10 text-brand-500 whitespace-nowrap";
-                document.getElementById("sectionOrders").classList.remove("hidden");
-            }
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function showModal(title, message, isConfirm = false, callback = null, customHtml = null) {
-            document.getElementById("modalTitle").innerText = title;
-            let msgDiv = document.getElementById("modalMessage");
-            if (customHtml) msgDiv.innerHTML = customHtml; else msgDiv.innerText = message;
-            
-            modalCallback = callback;
-            let cancelBtn = document.getElementById("modalBtnCancel");
-            let okBtn = document.getElementById("modalBtnOk");
-
-            if (isConfirm) {
-                cancelBtn.style.display = "block"; okBtn.style.display = "block";
-            } else {
-                cancelBtn.style.display = "block"; cancelBtn.innerText = "Đóng"; okBtn.style.display = "none";
-            }
-            document.getElementById("customModalOverlay").style.display = "flex";
-        }
-
-        function closeModal(result) {
-            document.getElementById("customModalOverlay").style.display = "none";
-            if (modalCallback) modalCallback(result);
-        }
-
-        async function updateAuthUI() {
-            const userActions = document.getElementById("headerUserActions");
-            const walletBox = document.getElementById("headerWalletBox");
-
-            const { data: { user } } = await _supabase.auth.getUser();
-            currentUser = user;
-
-            if (currentUser) {
-                const { data: member } = await _supabase
-                    .from('members')
-                    .select('*')
-                    .eq('id', currentUser.id)
-                    .maybeSingle();
-                
-                currentUserMember = member;
-                const displayName = escapeHtml(member?.username || currentUser.email);
-                const balance = member?.balance || 0;
-
-                userActions.innerHTML = `
-                    <span class="text-xs font-bold text-slate-300 hidden sm:inline">${displayName}</span>
-                    <button class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 border border-slate-700" onclick="logout()">Thoát</button>
-                `;
-                walletBox.innerHTML = `
-                    <div>💵 Ví: <b class="text-emerald-400 font-extrabold">${formatCurrency(balance)}</b></div>
-                    <button class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs" onclick="showModal('Nạp Tiền', 'Bank: MB Bank\\nSTK: 0972950246\\nTên: Admin MMO\\nNội dung CK: napvi ${displayName}\\nAdmin sẽ cộng tiền vào ví cho bạn sau khi nhận.')">➕ Nạp</button>
-                `;
-                loadStoreData();
-                loadOrdersFromSupabase();
-                subscribeOrderRealtime();
-            } else {
-                if (realtimeChannel) {
-                    await _supabase.removeChannel(realtimeChannel);
-                    realtimeChannel = null;
-                }
-                currentUserMember = null;
-                userActions.innerHTML = `
-                    <button class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 border border-slate-700" onclick="openLogin()">Đăng Nhập</button>
-                    <button class="px-3 py-1.5 rounded-xl bg-brand-500 hover:bg-brand-600 text-xs font-bold text-white shadow-lg shadow-brand-500/20" onclick="openRegister()">Đăng Ký</button>
-                `;
-                walletBox.innerHTML = `<div>Chưa đăng nhập tài khoản.</div>`;
-                loadStoreData();
-            }
-        }
-
-        function renderTurnstileWidget(containerId, callback) {
-            const container = document.getElementById(containerId);
-            if (!container) return;
-            container.innerHTML = '';
-            
-            let attempts = 0;
-            const checkAndRender = setInterval(() => {
-                attempts++;
-                if (typeof turnstile !== 'undefined') {
-                    clearInterval(checkAndRender);
-                    const widgetId = turnstile.render('#' + containerId, {
-                        sitekey: TURNSTILE_SITE_KEY
-                    });
-                    callback(widgetId);
-                } else if (attempts > 30) { 
-                    clearInterval(checkAndRender);
-                    container.innerHTML = '<span style="color:red; font-size:11px;">Không thể tải Captcha. Vui lòng thử lại!</span>';
-                }
-            }, 100);
-        }
-
-        function openLogin() {
-            loginWidgetId = null;
-            showModal("ĐĂNG NHẬP", "", true, handleLogin, `
-                <div class="space-y-3">
-                    <input type="email" id="popEmail" placeholder="Nhập Email đăng nhập..." class="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-200 focus:outline-none focus:border-brand-500">
-                    <input type="password" id="popPass" placeholder="Mật khẩu..." class="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-200 focus:outline-none focus:border-brand-500">
-                    <div class="flex justify-center" id="turnstile-login-container"></div>
-                </div>
-            `);
-
-            renderTurnstileWidget('turnstile-login-container', (wId) => { loginWidgetId = wId; });
-        }
-
-        async function handleLogin(res) {
-            if(!res) return;
-            let email = document.getElementById("popEmail").value.trim();
-            let pass = document.getElementById("popPass").value.trim();
-            let captchaToken = (loginWidgetId !== null && typeof turnstile !== 'undefined') ? turnstile.getResponse(loginWidgetId) : null;
-
-            if (!captchaToken) {
-                showModal("Lỗi", "Vui lòng xác thực Captcha!");
-                return;
-            }
-
-            const { data, error } = await _supabase.auth.signInWithPassword({
-                email: email,
-                password: pass,
-                options: { captchaToken: captchaToken }
-            });
-
-            if (error) {
-                showModal("Lỗi", error.message.includes('Invalid login credentials') ? "Sai tài khoản hoặc mật khẩu!" : escapeHtml(error.message));
-                if (typeof turnstile !== 'undefined' && loginWidgetId !== null) turnstile.reset(loginWidgetId);
-                return;
-            }
-
-            await updateAuthUI();
-            showModal("Thành công", "Đăng nhập thành công!");
-        }
-
-        function openRegister() {
-            regWidgetId = null;
-            showModal("ĐĂNG KÝ", "", true, handleReg, `
-                <div class="space-y-3">
-                    <input type="text" id="regUser" placeholder="Tên đăng nhập (Username)..." class="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-200 focus:outline-none focus:border-brand-500">
-                    <input type="email" id="regEmail" placeholder="Email của bạn..." class="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-200 focus:outline-none focus:border-brand-500">
-                    <input type="password" id="regPass" placeholder="Mật khẩu..." class="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-200 focus:outline-none focus:border-brand-500">
-                    <input type="password" id="regPassConfirm" placeholder="Nhập lại mật khẩu..." class="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-200 focus:outline-none focus:border-brand-500">
-                    <div class="flex justify-center" id="turnstile-reg-container"></div>
-                </div>
-            `);
-
-            renderTurnstileWidget('turnstile-reg-container', (wId) => { regWidgetId = wId; });
-        }
-
-        async function handleReg(res) {
-            if(!res) return;
-            let username = document.getElementById("regUser").value.trim();
-            let email = document.getElementById("regEmail").value.trim();
-            let pass = document.getElementById("regPass").value.trim();
-            let passConfirm = document.getElementById("regPassConfirm").value.trim();
-            let captchaToken = (regWidgetId !== null && typeof turnstile !== 'undefined') ? turnstile.getResponse(regWidgetId) : null;
-
-            if (!username || !email || !pass) { showModal("Lỗi", "Vui lòng nhập đầy đủ thông tin!"); return; }
-            if (!captchaToken) { showModal("Lỗi", "Vui lòng xác thực Captcha!"); return; }
-            if (pass !== passConfirm) { showModal("Lỗi", "Mật khẩu xác nhận không khớp!"); return; }
-
-            let okBtn = document.getElementById("modalBtnOk");
-            if (okBtn) { okBtn.disabled = true; okBtn.innerText = "⏳ Đang đăng ký..."; }
-
-            const { data, error } = await _supabase.auth.signUp({
-                email: email,
-                password: pass,
-                options: {
-                    captchaToken: captchaToken,
-                    data: { username: username }
-                }
-            });
-
-            if (okBtn) { okBtn.disabled = false; okBtn.innerText = "Xác Nhận"; }
-
-            if (error) { 
-                showModal("Lỗi", escapeHtml(error.message)); 
-                if (typeof turnstile !== 'undefined' && regWidgetId !== null) turnstile.reset(regWidgetId);
-                return; 
-            }
-
-            showModal("Thành công", "Bạn đã đăng ký thành công, vui lòng đăng nhập để sử dụng dịch vụ.", false, () => {
-                setTimeout(() => {
-                    openLogin();
-                    setTimeout(() => {
-                        let emailInput = document.getElementById("popEmail");
-                        if(emailInput) emailInput.value = escapeHtml(email);
-                    }, 100);
-                }, 200);
-            });
-        }
-
-        async function logout() {
-            if (realtimeChannel) {
-                await _supabase.removeChannel(realtimeChannel);
-                realtimeChannel = null;
-            }
-            await _supabase.auth.signOut();
-            cachedOrders = [];
-            document.getElementById("orderListContainer").innerHTML = "";
-            await updateAuthUI();
-        }
-
-        function switchCategory(cat) {
-            currentCategory = cat;
-            ['Shopee', 'Facebook', 'Gmail', 'iCloud', 'TikTok', 'MyAcc'].forEach(c => {
-                let btn = document.getElementById(c === 'MyAcc' ? 'tabMyAcc' : ('tab' + c));
-                if(btn) {
-                    btn.className = "px-4 py-2 rounded-xl text-xs font-bold bg-slate-900 text-slate-400 border border-slate-800 hover:border-slate-700 hover:text-white transition whitespace-nowrap";
-                }
-            });
-
-            if(cat === 'my') {
-                document.getElementById("tabMyAcc").className = "px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 text-white transition whitespace-nowrap";
-                document.getElementById("marketList").style.display = "none";
-                document.getElementById("myAccList").style.display = "block";
-            } else {
-                let activeBtn = document.getElementById('tab' + cat);
-                if(activeBtn) activeBtn.className = "px-4 py-2 rounded-xl text-xs font-bold bg-brand-500 text-white transition whitespace-nowrap shadow-lg shadow-brand-500/20";
-                document.getElementById("marketList").style.display = "grid";
-                document.getElementById("myAccList").style.display = "none";
-            }
-            loadStoreData();
-        }
-
-        async function loadStoreData() {
-            if (currentCategory !== 'my') {
-                const { data: marketData } = await _supabase
-                    .from('mmo_accounts')
-                    .select('*')
-                    .eq('status', 'Đang bán')
-                    .eq('platform', currentCategory);
-                
-                let marketHtml = '';
-                if(marketData && marketData.length > 0) {
-                    let grouped = {};
-                    marketData.forEach(item => {
-                        let groupKey = `${item.platform}_${item.price}`;
-                        if (!grouped[groupKey]) {
-                            grouped[groupKey] = {
-                                title: escapeHtml(item.title || `Tài khoản ${item.platform}`),
-                                price: item.price,
-                                description: escapeHtml(item.description || "Không có mô tả."),
-                                platform: escapeHtml(item.platform),
-                                items: []
-                            };
-                        }
-                        grouped[groupKey].items.push(item);
-                    });
-
-                    let index = 1;
-                    for (let key in grouped) {
-                        let group = grouped[key];
-                        let stockCount = group.items.length;
-                        let firstId = group.items[0].id;
-                        let uniqueBuyId = `buy_${group.platform}_${group.price}_${firstId}`;
-
-                        marketHtml += `
-                            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 hover:border-slate-700 transition">
-                                <div class="flex items-start gap-3 mb-3">
-                                    <div class="w-8 h-8 rounded-xl bg-brand-500/20 text-brand-500 flex items-center justify-center font-bold text-xs shrink-0">${index++}</div>
-                                    <div class="flex-1">
-                                        <h3 class="font-bold text-sm text-slate-100">${group.title}</h3>
-                                        <p class="text-xs text-slate-400 mt-1">Giá: <b class="text-brand-500">${formatCurrency(group.price)}</b> | Kho: <b class="${stockCount > 0 ? 'text-emerald-400' : 'text-red-400'}">${stockCount} sẵn có</b></p>
-                                    </div>
-                                </div>
-                                <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/80 text-xs text-slate-400 mb-4 whitespace-pre-line leading-relaxed">${group.description}</div>
-                                <div class="flex gap-2 items-center">
-                                    <input type="number" id="qty_${uniqueBuyId}" value="1" min="1" max="${stockCount}" class="w-16 px-2 py-2 bg-slate-950 border border-brand-500/50 rounded-xl text-center text-xs font-bold text-slate-200 focus:outline-none">
-                                    <button id="btn_${uniqueBuyId}" ${stockCount === 0 ? 'disabled' : ''} onclick="buyGroupAccounts('${group.platform}', ${group.price}, ${stockCount}, '${uniqueBuyId}', this)" class="flex-1 py-2 bg-brand-500 hover:bg-brand-600 disabled:bg-slate-800 disabled:text-slate-600 text-white font-bold text-xs rounded-xl shadow-lg shadow-brand-500/20 transition">
-                                        🛒 Mua Ngay
-                                    </button>
-                                </div>
-                            </div>`;
-                    }
-                } else { 
-                    marketHtml = `
-                        <div class="col-span-full text-center py-12 text-slate-500 text-sm bg-slate-900/50 rounded-2xl border border-slate-800">
-                            <div class="text-3xl mb-2">🛍️</div>
-                            Danh mục <b>${escapeHtml(currentCategory)}</b> hiện chưa có tài khoản nào.
-                        </div>`; 
-                }
-                document.getElementById("marketList").innerHTML = marketHtml;
-            }
-
-            if (!currentUser) {
-                document.getElementById("myAccList").innerHTML = `
-                    <div class="text-center py-8 text-slate-500 text-xs bg-slate-900 rounded-2xl border border-slate-800">
-                        Vui lòng đăng nhập để xem danh sách tài khoản đã mua.
-                    </div>`;
-                return;
-            }
-
-            const { data: resMyData } = await _supabase.rpc('get_user_orders');
-            const myData = (resMyData && resMyData.success) ? resMyData.orders : [];
-
-            let myInnerHtml = '';
-            if(myData && myData.length > 0) {
-                let groupedMy = {};
-                myData.forEach(item => {
-                    let timeKey = item.updated_at ? item.updated_at.substring(0, 19) : item.id;
-                    let groupKey = `${timeKey}_${item.platform}_${item.price}`;
-                    if (!groupedMy[groupKey]) {
-                        groupedMy[groupKey] = {
-                            updated_at: item.updated_at,
-                            platform: item.platform,
-                            price: item.price,
-                            items: []
-                        };
-                    }
-                    groupedMy[groupKey].items.push(item);
-                });
-
-                Object.keys(groupedMy).forEach(key => {
-                    let group = groupedMy[key];
-                    let count = group.items.length;
-                    let dateStr = group.updated_at ? new Date(group.updated_at).toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' }) : 'Gần đây';
-                    let titleText = escapeHtml(group.items[0].title || `Tài khoản ${group.platform}`);
-                    let descText = escapeHtml(group.items[0].description || '');
-                    let combinedDetails = escapeHtml(group.items.map(i => i.account_details).join('\n'));
-                    let firstId = group.items[0].id;
-                    let totalCost = group.price * count;
-
-                    myInnerHtml += `
-                        <div class="bg-slate-900 border-l-4 border-emerald-500 border-y border-r border-slate-800 rounded-2xl p-4 mb-3 space-y-3">
-                            <div class="flex justify-between items-center text-xs">
-                                <span class="font-bold text-slate-200">Đơn mua #${firstId}</span>
-                                <span class="bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-md font-bold">${count} acc</span>
-                            </div>
-                            <div class="text-xs text-slate-400">${dateStr} | Loại: ${titleText} | Tổng trừ: <b class="text-brand-500">${formatCurrency(totalCost)}</b>.</div>
-                            ${descText ? `<div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 text-xs text-slate-400">${descText}</div>` : ''}
-                            <textarea readonly class="w-full bg-slate-950 text-red-400 font-mono text-xs p-3 rounded-xl border border-slate-800 focus:outline-none resize-none" id="acc_text_batch_${firstId}">${combinedDetails}</textarea>
-                            <div class="flex gap-2">
-                                <button onclick="copyAccText('acc_text_batch_${firstId}')" class="flex-1 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded-xl border border-slate-700 transition">📋 Copy tất cả (${count} acc)</button>
-                                <button onclick="showModal('ADD Mail', 'Tính năng add mail tự động hoặc hướng dẫn add mail cho tài khoản này.')" class="flex-1 py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold rounded-xl transition">ADD Mail</button>
-                            </div>
-                        </div>`;
-                });
-            } else { 
-                myInnerHtml = `
-                    <div class="text-center py-12 text-slate-500 text-xs bg-slate-900 rounded-2xl border border-slate-800">
-                        <div class="text-3xl mb-2">📦</div>
-                        Bạn chưa mua tài khoản nào.
-                    </div>`; 
-            }
-
-            document.getElementById("myAccList").innerHTML = `<div class="my-acc-scroll-box space-y-3">${myInnerHtml}</div>`;
-        }
-
-        function copyAccText(elementId) {
-            let textarea = document.getElementById(elementId);
-            if(!textarea) return;
-            textarea.select();
-            textarea.setSelectionRange(0, 99999);
-            navigator.clipboard.writeText(textarea.value);
-            showModal("Thành công", "Đã sao chép tất cả thông tin tài khoản vào bộ nhớ tạm!");
-        }
-
-        async function buyGroupAccounts(platform, price, maxStock, uniqueId, btnEl) {
-            if (!currentUser) {
-                showModal("Thông báo", "Vui lòng đăng nhập để mua tài khoản!");
-                return;
-            }
-
-            let qtyInput = document.getElementById(`qty_${uniqueId}`);
-            let qty = parseInt(qtyInput ? qtyInput.value : 1, 10) || 1;
-
-            if (isNaN(qty) || qty < 1) { showModal("Lỗi", "Số lượng mua không hợp lệ!"); return; }
-            if (qty > maxStock) { showModal("Lỗi", `Kho chỉ còn lại ${maxStock} tài khoản!`); return; }
-
-            let totalPrice = price * qty;
-
-            showModal("Xác nhận Mua", `Thanh toán ${formatCurrency(totalPrice)} cho ${qty} tài khoản này?`, true, async (res) => {
-                if (!res) return;
-
-                if(btnEl) { btnEl.disabled = true; btnEl.innerText = "⏳ Đang xử lý..."; }
-
-                const { data, error } = await _supabase.rpc('mua_tai_khoan', {
-                    p_platform: platform,
-                    p_qty: qty
-                });
-
-                if(btnEl) { btnEl.disabled = false; btnEl.innerText = "🛒 Mua Ngay"; }
-
-                if (error) { showModal("Lỗi hệ thống", escapeHtml(error.message)); return; }
-                if (!data.success) { showModal("Không thể mua", escapeHtml(data.message)); return; }
-
-                updateAuthUI();
-                loadStoreData();
-
-                let combinedDetails = escapeHtml((data.details || []).join('\n'));
-                let uniqueModalId = 'modal_acc_list_' + Date.now();
-                showModal(`Mua thành công ${qty} tài khoản!`, "", false, null, `
-                    <div class="space-y-3">
-                        <div class="text-xs text-slate-400 text-center">Danh sách tài khoản của bạn:</div>
-                        <textarea readonly id="${uniqueModalId}" class="w-full h-28 bg-slate-950 text-red-400 font-mono text-xs p-3 rounded-xl border border-slate-800 focus:outline-none resize-none">${combinedDetails}</textarea>
-                        <button onclick="copyAccText('${uniqueModalId}')" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl shadow-lg shadow-emerald-600/20 transition">📋 Copy Danh Sách Acc</button>
-                    </div>
-                `);
-            });
-        }
-
-        async function fetchOtpLink(btnEl) {
-            let val = document.getElementById("fetchInputEmail").value.trim();
-            let resultDiv = document.getElementById("fetchResult");
-            if (!val) { showModal("Thông Báo", "Vui lòng nhập tên hoặc email!"); return; }
-
-            if(btnEl) { btnEl.disabled = true; btnEl.innerText = "⏳ Đang kết nối..."; }
-            resultDiv.innerHTML = `<span class="text-amber-500 font-bold">⏳ Đang kết nối...</span>`;
-
-            try {
-                let response = await fetch('/api/otp?hide=' + encodeURIComponent(val));
-                if (!response.ok) throw new Error(`Lỗi server: ${response.status}`);
-                let data = await response.json();
-
-                if (data.status === "success") {
-                    var safeEmail = escapeHtml(data.hide_email_tin);
-                    var safeOtp = escapeHtml(data.otp || 'Không có');
-                    var rawLink = data.link_xac_thuc_tai_day || '';
-                    var lowerLink = rawLink.toLowerCase();
-                    var isValidUrl = lowerLink.startsWith('http://') || lowerLink.startsWith('https://');
-                    var safeLink = escapeHtml(rawLink);
-
-                    var linkHtml = (isValidUrl && safeLink !== "Không có") 
-                        ? `<a href="${safeLink}" target="_blank" class="block mt-2 bg-blue-600 hover:bg-blue-500 text-white py-2 text-center rounded-xl font-bold text-xs transition">MỞ LINK XÁC THỰC</a>` 
-                        : '';
-
-                    resultDiv.innerHTML = `
-                        <div class="bg-slate-950 p-4 rounded-xl border border-brand-500/50 space-y-1">
-                            <div><b>Email:</b> ${safeEmail}</div>
-                            <div><b>OTP:</b> <span class="text-brand-500 text-base font-bold">${safeOtp}</span></div>
-                            ${linkHtml}
-                        </div>`;
-                } else {
-                    resultDiv.innerHTML = `<span class="text-red-400">⚠️ ${escapeHtml(data.message || 'Không tìm thấy dữ liệu')}</span>`;
-                }
-            } catch (e) {
-                resultDiv.innerHTML = `<span class="text-red-400">⚠️ Không thể kết nối server hoặc dữ liệu không hợp lệ.</span>`;
-            } finally {
-                if(btnEl) { btnEl.disabled = false; btnEl.innerText = "Lấy Link Xác Thực / OTP"; }
-            }
-        }
-
-        function switchDepositTab(type) {
-            document.getElementById("tabBtnSingle").className = type === 'single' ? 'flex-1 py-2 rounded-lg text-xs font-bold bg-brand-500 text-white transition' : 'flex-1 py-2 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition';
-            document.getElementById("tabBtnMultiple").className = type === 'multiple' ? 'flex-1 py-2 rounded-lg text-xs font-bold bg-brand-500 text-white transition' : 'flex-1 py-2 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition';
-            document.getElementById("depositSingleForm").style.display = type === 'single' ? 'grid' : 'none';
-            document.getElementById("depositMultipleForm").style.display = type === 'multiple' ? 'block' : 'none';
-        }
-
-        async function addNewOrder(btnEl) {
-            if(!currentUser) { showModal("Lỗi", "Vui lòng đăng nhập!"); return; }
-            let c = document.getElementById("inputOrderCode").value.trim();
-            let e = document.getElementById("inputEmail").value.trim();
-            let n = document.getElementById("inputProductName").value.trim() || 'Đơn Shopee';
-            let a = parseInt(document.getElementById("inputAmount").value, 10) || 0;
-
-            if (!c || !e) { showModal("Lỗi", "Mã đơn và Email không được để trống!"); return; }
-
-            if(btnEl) { btnEl.disabled = true; btnEl.innerText = "⏳ Đang nạp..."; }
-
-            const { error } = await _supabase.from('shopee_orders').insert({
-                order_code: c,
-                product_name: n,
-                email: e,
-                amount: a,
-                price: a,
-                user_id: currentUser.id,
-                status: 'Đang chờ giao'
-            });
-
-            if(btnEl) { btnEl.disabled = false; btnEl.innerText = "Nạp Đơn Vào Hệ Thống"; }
-
-            if (error) {
-                if (error.code === '23505' || error.message.includes('unique_user_order_code')) {
-                    showModal("Lỗi trùng lặp", `Mã đơn hàng #${escapeHtml(c)} đã tồn tại trong hệ thống của bạn! Không thể nạp trùng.`);
-                } else {
-                    showModal("Lỗi", "Không thể nạp đơn: " + escapeHtml(error.message));
-                }
-                return;
-            }
-
-            showModal("Thành công", "Đã nạp đơn thành công!");
-            document.getElementById("inputOrderCode").value = "";
-            document.getElementById("inputProductName").value = "";
-            document.getElementById("inputAmount").value = "";
-            document.getElementById("inputEmail").value = "";
-            loadOrdersFromSupabase();
-        }
-
-        async function addMultipleOrders(btnEl) {
-            if(!currentUser) return;
-            let lines = document.getElementById("inputMultipleLines").value.trim().split('\n');
-
-            let insertData = lines.map(line => {
-                let p = line.split('|').map(x=>x.trim());
-                if (p.length < 2 || !p[0]) return null;
-                
-                let code = p[0];
-                let parsedAmount = p[3] ? (parseInt(p[3].replace(/\D/g, ''), 10) || 0) : 0;
-                
-                return { 
-                    order_code: code, 
-                    email: p[1] || 'none@icloud.com', 
-                    product_name: p[2] || 'Đơn Shopee', 
-                    amount: parsedAmount,
-                    price: parsedAmount,
-                    user_id: currentUser.id, 
-                    status: 'Đang chờ giao' 
-                };
-            }).filter(Boolean);
-
-            if(insertData.length > 0) {
-                if(btnEl) { btnEl.disabled = true; btnEl.innerText = "⏳ Đang nạp hàng loạt..."; }
-                
-                const BATCH_SIZE = 50;
-                let hasError = false;
-                let insertedCount = 0;
-
-                for (let i = 0; i < insertData.length; i += BATCH_SIZE) {
-                    const batch = insertData.slice(i, i + BATCH_SIZE);
-                    const { error } = await _supabase.from('shopee_orders').insert(batch);
-                    if (error) {
-                        hasError = true;
-                        showModal("Lỗi", `Lỗi nạp đơn: ${escapeHtml(error.message)}`);
-                        break;
-                    }
-                    insertedCount += batch.length;
-                }
-
-                if(btnEl) { btnEl.disabled = false; btnEl.innerText = "Nạp Hàng Loạt"; }
-
-                if (!hasError && insertedCount > 0) {
-                    showModal("Thành công", `Đã nạp thành công ${insertedCount} đơn hàng mới!`);
-                    document.getElementById("inputMultipleLines").value = "";
-                    loadOrdersFromSupabase();
-                }
-            } else {
-                showModal("Thông báo", "Không có dữ liệu hợp lệ để nạp.");
-            }
-        }
-
-        async function loadOrdersFromSupabase() {
-            if (!currentUser) return;
-
-            const { data: directData } = await _supabase
-                .from('shopee_orders')
-                .select('*')
-                .eq('user_id', currentUser.id)
-                .order('created_at', { ascending: false });
-
-            cachedOrders = directData || [];
-            filterOrders();
-        }
-
-        function switchOrderTab(tab) {
-            currentOrderTab = tab;
-            ['all', 'completed', 'pending'].forEach(t => {
-                let btn = document.getElementById(`orderTab-${t}`);
-                if(btn) {
-                    btn.className = t === tab ? 'px-3 py-1.5 rounded-lg text-xs font-bold bg-brand-500 text-white' : 'px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-900 border border-slate-800 text-slate-400';
-                }
-            });
-
-            filterOrders(true);
-        }
-
-        function filterOrders(resetPage = false) {
-            if (resetPage) currentOrderPage = 1;
-            
-            let keyword = document.getElementById("searchOrderInput").value.toLowerCase().trim();
-            
-            let filtered = cachedOrders.filter(o => {
-                let matchesSearch = (o.order_code && o.order_code.toLowerCase().includes(keyword)) ||
-                                    (o.product_name && o.product_name.toLowerCase().includes(keyword));
-                
-                let isSuccess = o.status === 'Đã giao' || o.status === 'Đã giao thành công' || (o.status && o.status.includes('Đã giao'));
-                
-                let matchesTab = true;
-                if (currentOrderTab === 'completed') {
-                    matchesTab = isSuccess;
-                } else if (currentOrderTab === 'pending') {
-                    matchesTab = !isSuccess;
-                }
-
-                return matchesSearch && matchesTab;
-            });
-
-            renderOrders(filtered);
-        }
-
-        function renderOrders(ordersToRender) {
-            let container = document.getElementById("orderListContainer");
-            let paginationContainer = document.getElementById("orderPagination");
-
-            if (!ordersToRender || ordersToRender.length === 0) {
-                container.innerHTML = "<div class='text-center text-xs text-slate-500 py-8 bg-slate-900 rounded-2xl border border-slate-800'>Không có đơn hàng nào</div>";
-                paginationContainer.innerHTML = "";
-                return;
-            }
-
-            let totalPages = Math.ceil(ordersToRender.length / ordersPerPage);
-            if (currentOrderPage > totalPages) currentOrderPage = totalPages;
-            if (currentOrderPage < 1) currentOrderPage = 1;
-
-            let startIdx = (currentOrderPage - 1) * ordersPerPage;
-            let paginatedItems = ordersToRender.slice(startIdx, startIdx + ordersPerPage);
-
-            let html = '';
-            paginatedItems.forEach(o => {
-                let isSuccess = o.status === 'Đã giao' || o.status === 'Đã giao thành công' || (o.status && o.status.includes('Đã giao'));
-                
-                let timeStr = '';
-                if (o.created_at) {
-                    let dateObj = new Date(o.created_at);
-                    timeStr = dateObj.toLocaleString('vi-VN', { 
-                        timeZone: 'Asia/Ho_Chi_Minh',
-                        hour: '2-digit', minute: '2-digit', second: '2-digit',
-                        day: '2-digit', month: '2-digit', year: 'numeric'
-                    });
-                }
-
-                let deliveredTimeStr = '';
-                if (o.delivered_at) {
-                    let dateObj = new Date(o.delivered_at);
-                    deliveredTimeStr = dateObj.toLocaleString('vi-VN', { 
-                        timeZone: 'Asia/Ho_Chi_Minh',
-                        hour: '2-digit', minute: '2-digit', second: '2-digit',
-                        day: '2-digit', month: '2-digit', year: 'numeric'
-                    });
-                }
-
-                const safeCode = escapeHtml(o.order_code);
-                const safeStatus = escapeHtml(o.status || 'Đang chờ giao');
-                const safeProd = escapeHtml(o.product_name || 'Đơn Shopee');
-                const safeEmail = escapeHtml(o.email);
-                
-                const valNum = Number(o.amount !== undefined && o.amount !== null && o.amount !== 0 ? o.amount : (o.price || 0));
-                const amountVal = formatCurrency(valNum);
-
-                html += `
-                <div class="bg-slate-900 border-l-4 ${isSuccess ? 'border-emerald-500' : 'border-amber-500'} border-y border-r border-slate-800 rounded-2xl p-4 space-y-3">
-                    <div class="flex justify-between items-center text-xs">
-                        <span class="font-bold text-slate-100">#${safeCode}</span>
-                        <span class="px-2 py-0.5 rounded-md font-bold text-[11px] ${isSuccess ? 'bg-emerald-500/20 text-emerald-400' : 'bg-amber-500/20 text-amber-400'}">${safeStatus}</span>
-                    </div>
-                    ${timeStr ? `<div class="text-[11px] text-slate-400">⏱️ Nạp lúc: ${timeStr}</div>` : ''}
-                    ${deliveredTimeStr ? `<div class="text-[11px] text-emerald-400 font-bold">🚚 Giao lúc: ${deliveredTimeStr}</div>` : ''}
-                    
-                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/80 text-xs text-slate-300 space-y-1">
-                        <div>📦 <b>Sản phẩm:</b> ${safeProd}</div>
-                        <div>💰 <b>Thanh toán:</b> <span class="text-brand-500 font-bold">${amountVal}</span></div>
-                        <div>📧 <b>Email:</b> ${safeEmail}</div>
-                    </div>
-
-                    <div class="flex gap-2">
-                        <button onclick="checkSingleOrder('${safeCode}')" class="flex-1 py-1.5 bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs rounded-xl transition">🔍 Check</button>
-                        <button onclick="editOrder(${o.id}, '${safeCode}', '${safeProd}', '${safeEmail}', ${valNum})" class="flex-1 py-1.5 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs rounded-xl transition">✏️ Sửa</button>
-                        <button onclick="deleteOrder(${o.id})" class="flex-1 py-1.5 bg-red-600 hover:bg-red-500 text-white font-bold text-xs rounded-xl transition">🗑️ Xóa</button>
-                    </div>
-                </div>`;
-            });
-            container.innerHTML = html;
-
-            if (totalPages > 1) {
-                let pagHtml = `<button onclick="changeOrderPage(${currentOrderPage - 1})" ${currentOrderPage === 1 ? 'disabled class="opacity-50 cursor-not-allowed px-3 py-1 bg-slate-800 rounded-lg"' : 'class="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-white rounded-lg"'}>Trang trước</button>`;
-                pagHtml += `<span class="font-bold">Trang ${currentOrderPage} / ${totalPages}</span>`;
-                pagHtml += `<button onclick="changeOrderPage(${currentOrderPage + 1})" ${currentOrderPage === totalPages ? 'disabled class="opacity-50 cursor-not-allowed px-3 py-1 bg-slate-800 rounded-lg"' : 'class="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-white rounded-lg"'}>Trang sau</button>`;
-                paginationContainer.innerHTML = pagHtml;
-            } else {
-                paginationContainer.innerHTML = "";
-            }
-        }
-
-        function changeOrderPage(targetPage) {
-            currentOrderPage = targetPage;
-            filterOrders(false);
-        }
-
-        async function checkSingleOrder(orderCode) {
-            let safeCode = escapeHtml(orderCode);
-            showModal("Đang kiểm tra", `Đang check đơn #${safeCode}...`);
-            
-            try {
-                let baseUrl = window.location.protocol + '//' + window.location.host;
-                let response = await fetch(`${baseUrl}/api/order?action=check_one&code=${encodeURIComponent(orderCode)}`);
-                if (!response.ok) throw new Error(`Lỗi phản hồi server: ${response.status}`);
-                
-                let res = await response.json();
-                showModal("Kết quả", escapeHtml(res.message || "Đã kiểm tra xong!"));
-                loadOrdersFromSupabase();
-            } catch (error) {
-                showModal("Lỗi", "Không thể kết nối đến máy chủ kiểm tra hoặc phản hồi không hợp lệ.");
-            }
-        }
-
-        async function checkAllOrders(btnEl) {
-            if (btnEl) { btnEl.disabled = true; btnEl.innerText = "⏳ Đang quét..."; }
-            showModal("Đang quét", "Hệ thống đang quét hàng loạt qua Google Script...");
-
-            try {
-                let baseUrl = window.location.protocol + '//' + window.location.host;
-                let response = await fetch(`${baseUrl}/api/order?action=check_all`);
-                if (!response.ok) throw new Error(`Lỗi phản hồi server: ${response.status}`);
-
-                let res = await response.json().catch(() => ({}));
-                showModal("Thành công", escapeHtml(res.message || "Đã quét xong!")); 
-                loadOrdersFromSupabase(); 
-            } catch (error) {
-                showModal("Lỗi", "Không thể kết nối đến máy chủ quét đơn.");
-            } finally {
-                if (btnEl) { btnEl.disabled = false; btnEl.innerText = "⚡ Quét Trạng Thái Báo Cáo"; }
-            }
-        }
-
-        function editOrder(id, code, prod, email, amount) {
-            const safeCode = escapeHtml(code);
-            const safeProd = escapeHtml(prod);
-            const safeEmail = escapeHtml(email);
-            const currentAmount = parseInt(amount, 10) || 0;
-
-            showModal("Sửa Đơn Hàng", "", true, async (res) => {
-                if(res) {
-                    let newCode = document.getElementById("editCode").value.trim();
-                    let newProd = document.getElementById("editProd").value.trim();
-                    let newAmount = parseInt(document.getElementById("editAmount").value, 10) || 0;
-                    let newEmail = document.getElementById("editEmail").value.trim();
-                    
-                    const { error } = await _supabase
-                        .from('shopee_orders')
-                        .update({
-                            order_code: newCode,
-                            product_name: newProd,
-                            amount: newAmount,
-                            price: newAmount,
-                            email: newEmail
-                        })
-                        .eq('id', id)
-                        .eq('user_id', currentUser.id);
-
-                    if (error) {
-                        if (error.code === '23505' || error.message.includes('unique_user_order_code')) {
-                            showModal("Lỗi trùng lặp", "Mã đơn hàng này đã tồn tại ở một đơn khác của bạn!");
-                        } else {
-                            showModal("Lỗi", "Không thể cập nhật đơn hàng: " + escapeHtml(error.message));
-                        }
-                        return;
-                    }
-
-                    showModal("Thành công", "Đã cập nhật đơn hàng!");
-                    loadOrdersFromSupabase();
-                }
-            }, `
-                <div class="space-y-3 text-left">
-                    <div>
-                        <label class="text-xs font-bold text-slate-300 block mb-1">Mã đơn hàng:</label>
-                        <input type="text" id="editCode" value="${safeCode}" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-200 focus:outline-none">
-                    </div>
-                    <div>
-                        <label class="text-xs font-bold text-slate-300 block mb-1">Tên sản phẩm:</label>
-                        <input type="text" id="editProd" value="${safeProd}" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-200 focus:outline-none">
-                    </div>
-                    <div>
-                        <label class="text-xs font-bold text-slate-300 block mb-1">Số tiền thanh toán (VNĐ):</label>
-                        <input type="number" id="editAmount" value="${currentAmount}" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-200 focus:outline-none">
-                    </div>
-                    <div>
-                        <label class="text-xs font-bold text-slate-300 block mb-1">Email iCloud:</label>
-                        <input type="text" id="editEmail" value="${safeEmail}" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-200 focus:outline-none">
-                    </div>
-                </div>
-            `);
-        }
-
-        function deleteOrder(id) {
-            showModal("Xác nhận xóa", "Bạn có chắc muốn xóa đơn này khỏi hệ thống?", true, async (res) => {
-                if(res) {
-                    const { error } = await _supabase
-                        .from('shopee_orders')
-                        .delete()
-                        .eq('id', id)
-                        .eq('user_id', currentUser.id);
-
-                    if (error) {
-                        showModal("Lỗi", "Không thể xóa đơn: " + escapeHtml(error.message));
-                        return;
-                    }
-
-                    showModal("Thành công", "Đã xóa đơn hàng!");
-                    loadOrdersFromSupabase();
-                }
-            });
-        }
-
-        updateAuthUI();
-    </script>
 </body>
 </html>
